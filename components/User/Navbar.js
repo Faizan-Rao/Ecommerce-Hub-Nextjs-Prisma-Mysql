@@ -46,6 +46,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        {/* Store Link */}
         <Button variant="solid"  colorScheme="green">
             <Link href={"#"}> Your Store</Link> 
           </Button>

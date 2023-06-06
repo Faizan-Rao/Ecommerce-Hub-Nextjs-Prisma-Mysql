@@ -28,6 +28,14 @@ export const userApi = createApi({
     }),
     dynamicSearch: builder.query({
       query: ({search, minPrice, maxPrice})=> `/User_DynamicSearch?search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+    }),
+    UserLogin: builder.mutation({
+      query: (body)=>({
+        url: `/User_Login`,
+        method: "POST",
+        body
+      })
+      
     })
   }),
 });
@@ -42,5 +50,6 @@ export const {
   useGetProductQuery,
   useGetProductDetailQuery,
   useGetAllProductQuery,
-  useDynamicSearchQuery
+  useDynamicSearchQuery,
+  useUserLoginMutation,
 } = userApi;

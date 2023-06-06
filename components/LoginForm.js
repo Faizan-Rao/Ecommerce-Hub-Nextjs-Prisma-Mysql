@@ -1,25 +1,62 @@
+import { useUserLoginMutation } from "@/services/userApiSlice";
 import Link from "next/link";
 import React from "react";
+import { useToast } from '@chakra-ui/react'
 
+const LoginForm = ({
+  email,
+  password,
+  role,
+  register,
+  handleSubmit,
+  errors,
+  reset
+}) => {
+  const [UserLogin] = useUserLoginMutation();
+  const toast = useToast()
 
-const LoginForm = ({ email, password, role, register, handleSubmit, errors }) => {
-  
-    const onSubmit = (data) => {
-        switch(role)
-        {
-            case 'user':
-                console.log("user")
-                break
-            case 'storeAdmin':
-                console.log("storeAdmin")
-                break
-            case 'admin':
-                console.log("admin")
-                break
-        }
-        console.log(data)
+  const onUserLoginCall = async (data) => {
+    try
+    {
+      const response = await UserLogin(data).unwrap()
+      toast({
+        title: `You Have Been Logged in Sucessfull`,
+        status: 'success',
+        isClosable: true,
+        position: 'top',
+        duration: 4000,
+      })
+      reset()
     }
+    catch(e)
+    {
+      toast({
+        title: `Invalid Credentials`,
+        status: 'error',
+        isClosable: true,
+        position: 'top',
+        duration: 4000,
+      })
+      
+    }
+  };
+
+  const onSubmit = (data) => {
+    switch (role) {
+      case "user":
+        onUserLoginCall(data)
+        break;
+      case "storeAdmin":
+        console.log("storeAdmin");
+        break;
+      case "admin":
+        console.log("admin");
+        break;
+    }
+  };
+
   return (
+    // Login Form
     <div className="flex justify-center flex-col gap-8 bg-gray-100 shadow-lg my-10  items-center min-h-[400px] p-20 rounded-lg">
       <h1 className="text-4xl font-semibold text-[#3ba33b]">Login</h1>
       <form

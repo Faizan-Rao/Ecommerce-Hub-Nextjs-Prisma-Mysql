@@ -7,13 +7,14 @@ const Login = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
 
   return (
     <div className='flex justify-center items-center'>
-      <LoginForm email={'userEmail'} role={'user'} password={'userPassword'} register={register} handleSubmit={handleSubmit} errors={errors} />
+      <LoginForm email={'userEmail'} role={'user'} password={'userPassword'} register={register} handleSubmit={handleSubmit} errors={errors} reset={reset} />
     </div>
   )
 }
