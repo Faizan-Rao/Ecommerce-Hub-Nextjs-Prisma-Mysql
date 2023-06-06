@@ -25,12 +25,11 @@ const CartDrawer = () => {
     totalQuantity,
   } = useSelector((state) => state.cart);
 
-  console.log("total price", totalPrice);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCartTotal());
-  }, [cart, dispatch]);
+  }, [cart,dispatch]);
 
   return (
     <div >
@@ -44,7 +43,7 @@ const CartDrawer = () => {
       </button>
 
       {/* Cart Drawer */}
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size={"lg"}>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size={"md"}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
@@ -55,17 +54,18 @@ const CartDrawer = () => {
             {cart.length > 0 && (
               <div className="flex justify-between items-center">
                 <Link
-                  href={"#"}
+                  href={"cart"}
                   className=" bg-[#38A169]   text-white    rounded-lg py-1 px-2 "
+                  onClick={onClose}
                 >
-                  Add to Checkout
+                  Visit Cart
                 </Link>
                 <div className="font-semibold text-lg">
                   Total Amount:{" "}
                   <span className="text-gray-500">${totalPrice}</span>{" "}
                 </div>
                 <div className="font-semibold text-lg">
-                  Total Quantity:{" "}
+                  Total Items:{" "}
                   <span className="text-gray-500">{totalQuantity}</span>{" "}
                 </div>
               </div>
@@ -95,7 +95,8 @@ const CartDrawer = () => {
                             className="w-[20%] border-2 outline-none text-center rounded "
                             name="qty"
                             id="qty"
-                            // onChange={() => null}
+                            onChange={() => null}
+                            defaultValue={0}
                             readOnly
                           />
                           <button
