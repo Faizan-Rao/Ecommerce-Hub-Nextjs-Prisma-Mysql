@@ -9,13 +9,17 @@ import Banner from "@/components/User/Banner";
 import Footer from "@/components/User/Footer";
 import { useState } from "react";
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react'
+import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
   const path = useRouter().pathname;
   const {cart, setCart} = useState(["Product"]);
-
+  
   return (
     <>
+    <Head>
+      <title>Bizworld - Trade to the World</title>  
+    </Head>    
       { 
         path.includes("/admin") ? (
         // Super Admin Interfaces 

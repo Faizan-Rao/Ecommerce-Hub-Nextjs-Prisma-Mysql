@@ -11,6 +11,9 @@ export const userApi = createApi({
     getStores: builder.query({
       query: () => `/User_getAllStore`,
     }),
+    getAllProduct: builder.query({
+      query: () => `/User_getAllProduct`,
+    }),
     getCategory: builder.query({
       query: (storeId) => `/User_getSpecificCategory?storeId=${storeId}`,
     }),
@@ -23,6 +26,9 @@ export const userApi = createApi({
     getProductDetail: builder.query({
       query: (prodId) => `/User_ProductDetail?prodId=${prodId}`,
     }),
+    dynamicSearch: builder.query({
+      query: ({search, minPrice, maxPrice})=> `/User_DynamicSearch?search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+    })
   }),
 });
 
@@ -34,5 +40,7 @@ export const {
   useGetCategoryQuery,
   useGetSubCategoryQuery,
   useGetProductQuery,
-  useGetProductDetailQuery
+  useGetProductDetailQuery,
+  useGetAllProductQuery,
+  useDynamicSearchQuery
 } = userApi;

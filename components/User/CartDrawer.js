@@ -36,10 +36,10 @@ const CartDrawer = () => {
       {/* Cart Button */}
       <button
         onClick={onOpen}
-        className="fixed bottom-2 z-10 right-2 text-[white] p-2 bg-[#3ba33b] rounded-lg flex items-center hover:bg-[green]"
+        className="fixed bottom-3 z-10 right-3 text-xl text-[white] p-2 bg-[#3ba33b] rounded-lg flex items-center hover:bg-[green]"
       >
         {" "}
-        <BsBasket className="mx-2" /> <span>Cart {cart.length}</span>{" "}
+        <BsBasket className="mx-2" /> <span> {cart.length}</span>{" "}
       </button>
 
       {/* Cart Drawer */}
@@ -49,7 +49,7 @@ const CartDrawer = () => {
           <DrawerCloseButton />
           <DrawerHeader>Your Cart</DrawerHeader>
 
-          <DrawerBody>
+          <DrawerBody overflow={"auto"}>
             {/* move to check out page */}
             {cart.length > 0 && (
               <div className="flex justify-between items-center">

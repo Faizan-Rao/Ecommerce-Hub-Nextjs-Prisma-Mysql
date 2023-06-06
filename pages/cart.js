@@ -78,8 +78,8 @@ const Cart = () => {
                     {/* Product Warranty */}
                     <Td isNumeric>{e.product_warranty}</Td>
                     {/* Price of Product */}
-                    <Td>
-                      Price:{" "}
+                    <Td isNumeric>
+                      
                       <span className="text-gray-500">${e.product_price}</span>
                     </Td>
                     <Td>

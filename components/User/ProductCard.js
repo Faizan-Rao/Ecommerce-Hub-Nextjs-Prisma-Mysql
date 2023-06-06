@@ -36,6 +36,9 @@ const ProductCard = ({ data }) => {
               ? data.product_desc
               : data.product_desc.substr(0, 50) + "..."}
           </Text>
+          <Text fontWeight={'semibold'} fontSize={'xl'}>
+            ${data.product_price}
+          </Text>
           {data.avg_rating && (
             <Text
               color="green.600"
@@ -47,6 +50,7 @@ const ProductCard = ({ data }) => {
               <span>Average Rating : {data.avg_rating?.substr(0, 3)} </span>{" "}
               <BsStarFill className="text-yellow-500 inline-block" />
             </Text>
+            
           )}
         </Stack>
       </CardBody>
