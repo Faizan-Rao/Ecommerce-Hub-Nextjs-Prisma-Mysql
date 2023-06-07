@@ -10,6 +10,7 @@ const persistConfig = {
   key: 'root',
   storage: storage,
   stateReconciler: autoMergeLevel1,
+ 
 };
 
 const rootReducer = combineReducers({

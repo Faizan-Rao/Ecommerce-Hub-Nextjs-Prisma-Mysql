@@ -60,12 +60,13 @@ const Cart = () => {
                       </button>
                       <input
                         type="number"
-                        value={e.product_qty}
+                        
                         className=" border-2 outline-none text-center rounded "
                         name="qty"
-                        id="qty"
-                        onChange={() => null}
-                        defaultValue={0}
+                        
+                        placeholder="0"
+                        onChange={() => ""}
+                        defaultValue={e.product_qty}
                         readOnly
                       />
                       <button

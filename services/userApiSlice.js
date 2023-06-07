@@ -3,7 +3,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // Define a service using a base URL and expected endpoints
 export const userApi = createApi({
   reducerPath: "userApi",
+  
+
   baseQuery: fetchBaseQuery({ baseUrl: "/api/User" }),
+  
   endpoints: (builder) => ({
     getRecommended: builder.query({
       query: () => `/User_getPopularProduct`,
@@ -30,6 +33,14 @@ export const userApi = createApi({
       query: ({ search, minPrice, maxPrice }) =>
         `/User_DynamicSearch?search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
     }),
+    UserFeedback: builder.mutation({
+      query: (body) => ({
+        url: `/User_Feedback`,
+        method: "POST",
+        body,
+      }),
+     
+    }),
     UserLogin: builder.mutation({
       query: (body) => ({
         url: `/User_Login`,
@@ -44,6 +55,7 @@ export const userApi = createApi({
         body,
       }),
     }),
+    
   }),
 });
 
@@ -59,5 +71,6 @@ export const {
   useGetAllProductQuery,
   useDynamicSearchQuery,
   useUserLoginMutation,
-  useUserSignupMutation
+  useUserSignupMutation,
+  useUserFeedbackMutation,
 } = userApi;

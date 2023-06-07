@@ -34,6 +34,7 @@ const Products = () => {
             className="p-1 rounded-lg outline-none inline-block border-2"
             name="search"
             id="search"
+            placeholder="Search"
           />
         </div>
         <div className="flex items-center gap-2">
