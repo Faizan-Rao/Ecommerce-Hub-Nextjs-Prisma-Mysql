@@ -23,7 +23,7 @@ const Detail = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const user = useSelector((state) => state.user.data);
   const { data, isLoading, isUninitialized } = useGetProductDetailQuery(prodId);
-  console.log(data)
+ 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [Feedback, setFeedback] = useState(0);
   const [userFeedBack] = useUserFeedbackMutation();
@@ -37,7 +37,7 @@ const Detail = () => {
     }
     try{
       const payload = await userFeedBack(feedbackBody).unwrap()
-      console.log(payload);
+      
       toast({
         title: `Thanks for Your Feedback`,
         status: "success",
@@ -48,7 +48,7 @@ const Detail = () => {
     }
     catch(err)
     {
-      console.log("Error")
+      
       toast({
         title: `You have already given the Feedback`,
         status: "info",
@@ -92,10 +92,11 @@ const Detail = () => {
                   Product Warranty : {data?.data[0]?.product_warranty} <br />
                 </p>
                 {/* Product Price and Add To Cart */}
-                <div className="flex justify-between items-center ">
+                <div className="flex justify-between items-center flex-wrap ">
                   <span className="title-font font-medium text-2xl text-gray-900">
                     ${data?.data[0]?.product_price}.00
                   </span>
+                  <div className="flex justify-end gap-3 my-4">
                   <button
                     onClick={() => dispatch(addToCart(data?.data[0]))}
                     className="flex ml-auto text-white bg-[#38a169] border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded"
@@ -111,6 +112,8 @@ const Detail = () => {
                       Give Review
                     </Button>
                   )}
+
+                  </div>
                 </div>
               </div>
             </div>
