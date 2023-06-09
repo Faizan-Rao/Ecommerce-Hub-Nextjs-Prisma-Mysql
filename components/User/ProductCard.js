@@ -16,11 +16,12 @@ import { BsStarFill } from "react-icons/bs";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/services/LocalSlices/CartLocalSlice";
+import { useRouter } from "next/router";
 
 const ProductCard = ({ data }) => {
-  const dispatch =  useDispatch();
-  const cart = useSelector((state)=>state.cart.value)
-  
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.value);
+  const path = useRouter().pathname;
   return (
     <Card maxW="xs">
       <CardBody>
@@ -36,7 +37,7 @@ const ProductCard = ({ data }) => {
               ? data.product_desc
               : data.product_desc.substr(0, 50) + "..."}
           </Text>
-          <Text fontWeight={'semibold'} fontSize={'xl'}>
+          <Text fontWeight={"semibold"} fontSize={"xl"}>
             ${data.product_price}
           </Text>
           {data.avg_rating && (
@@ -50,18 +51,30 @@ const ProductCard = ({ data }) => {
               <span>Average Rating : {data.avg_rating?.substr(0, 3)} </span>{" "}
               <BsStarFill className="text-yellow-500 inline-block" />
             </Text>
-            
           )}
         </Stack>
       </CardBody>
       <hr className="border-2" />
       <CardFooter>
         <ButtonGroup spacing="2">
-          <Button onClick={()=>dispatch(addToCart(data))} variant="solid" colorScheme="green">
-            Add to cart
-          </Button>
-          <Button variant="ghost" colorScheme="green">
-            <Link href={{pathname:"detail", query:{prodId : data.product_id} }}>View More</Link> 
+          {path !== "/" && (
+            <Button
+              onClick={() => dispatch(addToCart(data))}
+              variant="solid"
+              colorScheme="green"
+            >
+              Add to cart
+            </Button>
+          )}
+          <Button
+            variant={path === "/" ? "solid" : `ghost`}
+            colorScheme="green"
+          >
+            <Link
+              href={{ pathname: "detail", query: { prodId: data.product_id } }}
+            >
+              View More
+            </Link>
           </Button>
         </ButtonGroup>
       </CardFooter>

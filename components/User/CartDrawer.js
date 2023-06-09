@@ -91,12 +91,12 @@ const CartDrawer = () => {
                           </button>
                           <input
                             type="number"
-                            onChange={()=>null}
+                            onChange={()=>""}
                             className="w-[20%] border-2 outline-none text-center rounded "
                             name="qty"
-                            id="qty"
+                           
                             placeholder="0"
-                            defaultValue={e.product_qty}
+                            value={e.product_qty}
                             
                             readOnly
                           />

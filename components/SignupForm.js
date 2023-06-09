@@ -33,7 +33,7 @@ const SignUpForm = ({
         }
 
       const response = await UserSignup(data).unwrap()
-      console.log(response)
+      
       toast({
         title: `You Have Been Signup Sucessfully`,
         status: 'success',

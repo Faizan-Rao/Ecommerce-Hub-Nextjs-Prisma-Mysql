@@ -10,27 +10,7 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    removeOne: (state, action) =>{
-      state.value = state.value.map(item=>{
-        
-        if(item.product_id === action.payload)
-        { 
-          if(item.product_qty <= 0)
-            return item
-          return {...item , product_qty: item.product_qty - 1}
-        }
-        return item;
-      })
-    },
-    addOne: (state, action) =>{
-     state.value = state.value.map(item=>{
-        if(item.product_id === action.payload)
-        {
-          return {...item , product_qty: item.product_qty + 1}
-        }
-        return item;
-      })
-    },
+   
     addToCart: (state, action) => {
       let find = state.value.findIndex(item => item.product_id === action.payload.product_id)
       if(find >= 0)
@@ -39,13 +19,34 @@ export const cartSlice = createSlice({
       }
       else
       {
+        
         state.value.push(action.payload)
       }
     },
     removeToCart : (state, action) => {
        state.value = state.value.filter(item => item.product_id !== action.payload) 
       },
-
+      removeOne: (state, action) =>{
+        state.value = state.value.map(item=>{
+          
+          if(item.product_id === action.payload)
+          { 
+            if(item.product_qty <= 0)
+              return item
+            return {...item , product_qty: item.product_qty - 1}
+          }
+          return item;
+        })
+      },
+      addOne: (state, action) =>{
+       state.value = state.value.map(item=>{
+          if(item.product_id === action.payload)
+          {
+            return {...item , product_qty: item.product_qty + 1}
+          }
+          return item;
+        })
+      },
     getCartTotal: (state) =>{
       const {totalPrice , totalQuantity} = state.value.reduce((cartTotal, cartItem)=>{
         const {product_qty, product_price} = cartItem;

@@ -12,12 +12,12 @@ export const userSlice = createSlice({
     removeUser: (state) => {
       state.data = {};
       state.isLoggedIn = false;
-      console.log(state.data);
+      
     },
     setUser: (state, action) => {
       state.data = action.payload;
       state.isLoggedIn = true;
-      console.log(state.data);
+      
     },
   },
 });

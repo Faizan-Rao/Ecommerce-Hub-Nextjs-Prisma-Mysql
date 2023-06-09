@@ -55,6 +55,13 @@ export const userApi = createApi({
         body,
       }),
     }),
+    UserProductTran: builder.mutation({
+      query: (body) => ({
+        url: `/User_ProductTransaction`,
+        method: "POST",
+        body,
+      }),
+    }),
     
   }),
 });
@@ -73,4 +80,5 @@ export const {
   useUserLoginMutation,
   useUserSignupMutation,
   useUserFeedbackMutation,
+  useUserProductTranMutation,
 } = userApi;

@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model admins {
+  admin_id       Int       @id @default(autoincrement())
+  admin_role     String    @db.VarChar(45)
+  admin_name     String    @db.VarChar(100)
+  admin_login    String    @unique(map: "admin_login_UNIQUE") @db.VarChar(60)
+  admin_password String    @db.VarChar(60)
+  account_no     String?   @db.VarChar(60)
+  phone_no       String?   @db.VarChar(60)
+  customer_id    String?   @db.VarChar(45)
+  manages        manages[]
+}
+
+model billing {
+  bill_id         Int               @id @default(autoincrement())
+  bill_card       String            @db.VarChar(45)
+  bill_date       DateTime
+  bill_card_no    String            @db.VarChar(16)
+  delivery_date   DateTime
+  customer_id     Int
+  customers       customers         @relation(fields: [customer_id], references: [customer_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_billing_customers1")
+  purchase_record purchase_record[]
+
+  @@index([customer_id], map: "fk_billing_customers1_idx")
+}
+
+model cancellations {
+  cancellation_id     Int             @id @default(autoincrement())
+  cancellation_date   DateTime?
+  cancellation_amount Float?          @db.Float
+  purchase_id         Int
+  purchase_record     purchase_record @relation(fields: [purchase_id], references: [purchase_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cancellations_purchase_record1")
+
+  @@index([purchase_id], map: "fk_cancellations_purchase_record1_idx")
+}
+
+model categories {
+  category_id           Int                     @id @default(autoincrement())
+  category_title        String                  @db.VarChar(70)
+  stores_has_categories stores_has_categories[]
+  subcategory           subcategory[]
+}
+
+model customers {
+  customer_id       Int        @id @default(autoincrement())
+  customer_name     String     @db.VarChar(100)
+  customer_login    String     @unique(map: "customer_login_UNIQUE") @db.VarChar(60)
+  customer_password String     @db.VarChar(60)
+  billing           billing[]
+  feedback          feedback[]
+}
+
+model feedback {
+  customer_id      Int
+  product_id       Int
+  feedback_comment String?   @db.Text
+  feedback_rating  Int?
+  customers        customers @relation(fields: [customer_id], references: [customer_id], onDelete: Cascade, map: "fk_customers_has_products_customers1")
+  products         products  @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_feedback_products1")
+
+  @@id([customer_id, product_id])
+  @@index([customer_id], map: "fk_customers_has_products_customers1_idx")
+  @@index([product_id], map: "fk_feedback_products1_idx")
+}
+
+model manages {
+  store_id Int
+  admin_id Int
+  stores   stores @relation(fields: [store_id], references: [store_id], onDelete: Cascade, map: "fk_admins_has_stores_stores1")
+  admins   admins @relation(fields: [admin_id], references: [admin_id], onDelete: Cascade, map: "fk_manages_admins1")
+
+  @@id([store_id, admin_id])
+  @@index([store_id], map: "fk_admins_has_stores_stores1_idx")
+  @@index([admin_id], map: "fk_manages_admins1_idx")
+}
+
+model products {
+  product_id           Int         @id @default(autoincrement())
+  product_title        String      @db.VarChar(150)
+  product_desc         String      @db.Text
+  product_price        Float       @db.Float
+  product_warranty     String?     @db.VarChar(45)
+  product_stock_status Int         @db.TinyInt
+  product_image        String?     @db.Text
+  subcategory_id       Int
+  product_qty          Int?        @default(1)
+  feedback             feedback[]
+  subcategory          subcategory @relation(fields: [subcategory_id], references: [subcategory_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_products_subcategory1")
+
+  @@index([subcategory_id], map: "fk_products_subcategory1_idx")
+  @@index([product_title], map: "product_title")
+}
+
+model purchase_record {
+  purchase_id       Int             @id @default(autoincrement())
+  purchase_title    String          @db.Text
+  purchase_quantity Int
+  purchase_type     String          @db.VarChar(45)
+  purchase_date     DateTime
+  purchase_amount   Float           @db.Float
+  discount          Int?
+  purchase_status   String          @db.VarChar(45)
+  product_id        Int?
+  bill_id           Int
+  cancellations     cancellations[]
+  billing           billing         @relation(fields: [bill_id], references: [bill_id], onDelete: Cascade, map: "fk_purchase_record_billing1")
+
+  @@index([bill_id], map: "fk_purchase_record_billing1_idx")
+}
+
+model stores {
+  store_id              Int                     @id @default(autoincrement())
+  store_name            String                  @db.VarChar(100)
+  manages               manages[]
+  stores_has_categories stores_has_categories[]
+}
+
+model stores_has_categories {
+  store_id    Int
+  category_id Int
+  stores      stores     @relation(fields: [store_id], references: [store_id], onDelete: Cascade, map: "fk_stores_has_categories_categories1_idx")
+  categories  categories @relation(fields: [category_id], references: [category_id], onDelete: Cascade, map: "fk_stores_has_categories_stores1_idx")
+
+  @@id([store_id, category_id])
+  @@index([category_id], map: "fk_stores_has_categories_categories1_idx")
+  @@index([store_id], map: "fk_stores_has_categories_stores1_idx")
+}
+
+model subcategory {
+  subcategory_id    Int        @id @default(autoincrement())
+  subcategory_title String     @db.VarChar(70)
+  category_id       Int
+  products          products[]
+  categories        categories @relation(fields: [category_id], references: [category_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_subcategory_categories1")
+
+  @@index([category_id], map: "fk_subcategory_categories1_idx")
+}

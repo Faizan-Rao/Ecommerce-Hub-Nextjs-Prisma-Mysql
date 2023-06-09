@@ -1,5 +1,10 @@
-import { addOne, removeOne, removeToCart } from "@/services/LocalSlices/CartLocalSlice";
-import React from "react";
+import {
+  addOne,
+ 
+  removeOne,
+  removeToCart,
+} from "@/services/LocalSlices/CartLocalSlice";
+import React  from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Table,
@@ -11,23 +16,39 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  useDisclosure,
+  Button,
 } from "@chakra-ui/react";
-Link
+Link;
 import { ImBin } from "react-icons/im";
 import Link from "next/link";
+import CheckoutForm from "@/components/User/CheckoutForm";
+import { useForm } from "react-hook-form";
 
 const Cart = () => {
+  
   const {
     value: cart,
     totalPrice,
     totalQuantity,
   } = useSelector((state) => state.cart);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const dispatch = useDispatch();
+ 
 
+ 
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  
   return (
     <div className="flex justify-between gap-1 flex-wrap  ">
       <div className="m-5 overflow-auto ">
-        <h1 className="text-3xl p-5">Your Cart</h1>
+        <h1 className="text-3xl p-5">Checkout Items</h1>
         {/* Table For Cart Items */}
         <TableContainer>
           <Table size="sm" className="border-2">
@@ -44,7 +65,7 @@ const Cart = () => {
             <Tbody className="bg-white">
               {cart.map((e, i) => {
                 return (
-                  <Tr key={i} >
+                  <Tr key={i}>
                     <Td>{i + 1}</Td>
                     <Td className="text-gray-500 text-lg font-semibold">
                       {e.product_title}
@@ -60,13 +81,10 @@ const Cart = () => {
                       </button>
                       <input
                         type="number"
-                        
                         className=" border-2 outline-none text-center rounded "
                         name="qty"
-                        
-                        placeholder="0"
                         onChange={() => ""}
-                        defaultValue={e.product_qty}
+                        value={e.product_qty}
                         readOnly
                       />
                       <button
@@ -80,7 +98,6 @@ const Cart = () => {
                     <Td isNumeric>{e.product_warranty}</Td>
                     {/* Price of Product */}
                     <Td isNumeric>
-                      
                       <span className="text-gray-500">${e.product_price}</span>
                     </Td>
                     <Td>
@@ -106,25 +123,32 @@ const Cart = () => {
           <Table size="md" className="border-2">
             <Thead className="bg-gray-200">
               <Tr>
-                <Th isNumeric>Total Items</Th>
                 <Th isNumeric>Total Amount</Th>
+                <Th isNumeric>Total Items</Th>
                 <Th></Th>
               </Tr>
             </Thead>
             <Tbody className="bg-white">
               <Tr>
-                <Td isNumeric fontWeight={'semibold'}>${totalPrice}</Td>
-                <Td isNumeric fontWeight={'semibold'}>{totalQuantity}</Td>
+                <Td isNumeric fontWeight={"semibold"}>
+                  ${totalPrice}
+                </Td>
+                <Td isNumeric fontWeight={"semibold"}>
+                  {totalQuantity}
+                </Td>
                 <Td isNumeric>
                   {" "}
-                  {cart.length > 0 && (
+                  {cart.length > 0 && isLoggedIn && (
                     <div className="flex justify-item items-center">
-                      <Link
+                      <Button
                         href={"cart"}
                         className=" bg-gray-400 text-md   text-white    rounded py-1 px-2 "
+                        onClick={onOpen}
+                        colorScheme="green"
+                        variant={'solid'}
                       >
                         Checkout Cart
-                      </Link>
+                      </Button>
                     </div>
                   )}
                 </Td>
@@ -133,6 +157,14 @@ const Cart = () => {
           </Table>
         </TableContainer>
       </div>
+      <CheckoutForm
+      isOpen = {isOpen}
+      onClose = {onClose}
+      type={"product"}
+      register={register}
+      handleSubmit={handleSubmit}
+      errors={errors}
+      reset={reset} />
     </div>
   );
 };

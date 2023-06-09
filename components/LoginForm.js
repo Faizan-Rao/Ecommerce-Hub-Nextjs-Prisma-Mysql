@@ -22,7 +22,7 @@ const LoginForm = ({
   const onUserLoginCall = async (data) => {
     try
     {
-      console.log(data)
+      
       const response = await UserLogin(data).unwrap()
       toast({
         title: `You Have Been Logged in Sucessfull`,
