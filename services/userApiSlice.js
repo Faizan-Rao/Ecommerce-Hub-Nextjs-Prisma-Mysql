@@ -29,6 +29,10 @@ export const userApi = createApi({
     getProductDetail: builder.query({
       query: (prodId) => `/User_ProductDetail?prodId=${prodId}`,
     }),
+    getOrders: builder.query({
+      query: (customer_id) =>
+        `/User_Orders?customer_id=${customer_id}`,
+    }),
     dynamicSearch: builder.query({
       query: ({ search, minPrice, maxPrice }) =>
         `/User_DynamicSearch?search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
@@ -81,4 +85,5 @@ export const {
   useUserSignupMutation,
   useUserFeedbackMutation,
   useUserProductTranMutation,
+  useGetOrdersQuery,
 } = userApi;

@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-
+import { BsBasket } from "react-icons/bs";
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const dispatch = useDispatch();
@@ -12,24 +12,30 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      {!isLoggedIn && (
-        <div className="m-2 flex items-center justify-end ">
+
+      {isLoggedIn ? (
+        <div className="m-2 flex items-center gap-4 justify-end ">
           <Link
-            href={"login"}
+            href={"track-order"}
             className="flex items-center hover:text-[#3ba33b]  "
           >
-            <AiOutlineLogin className="mx-1" /> <span>Signup | Login</span>
+            <BsBasket className="mx-1" /> <span>Track-Order</span>
           </Link>
-        </div>
-      )}
-      {isLoggedIn && (
-        <div className="m-2 flex items-center justify-end ">
           <Link
             href={"#"}
             onClick={() => dispatch(removeUser())}
             className="flex items-center hover:text-[#3ba33b]  "
           >
             <AiOutlineLogin className="mx-1" /> <span>Logout</span>
+          </Link>
+        </div>
+      ) : (
+        <div className="m-2 flex items-center justify-end ">
+          <Link
+            href={"login"}
+            className="flex items-center hover:text-[#3ba33b]  "
+          >
+            <AiOutlineLogin className="mx-1" /> <span>Signup | Login</span>
           </Link>
         </div>
       )}
