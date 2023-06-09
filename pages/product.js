@@ -59,6 +59,7 @@ const Products = () => {
             name="maxPrice"
             placeholder="0"
             id=""
+            
           />
         </div>
       </div>

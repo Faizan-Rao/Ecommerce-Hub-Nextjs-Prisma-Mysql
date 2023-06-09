@@ -13,11 +13,24 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
-Link;
+
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useToast,
+} from "@chakra-ui/react";
 import { ImBin } from "react-icons/im";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { useGetOrdersQuery } from "@/services/userApiSlice";
+import {
+  useGetOrdersQuery,
+  useRemoveOrderMutation,
+} from "@/services/userApiSlice";
 
 const TrackOrder = () => {
   // states and Hooks
@@ -25,27 +38,29 @@ const TrackOrder = () => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useGetOrdersQuery(customer_id);
-
+  const [removeOrder] = useRemoveOrderMutation();
+  const [OrderID, setOrderID] = useState(null)
+    const toast = useToast()
   return (
     <div className="flex justify-between gap-1 flex-wrap  ">
-      <div className="m-5 overflow-auto ">
+      <div className="m-5 overflow-auto flex flex-col justify-center ">
         <h1 className="text-3xl p-5">Track Orders</h1>
         {/* Table For Order Items */}
-        <TableContainer className="flex gap-8">
+        <TableContainer>
           {!isLoading &&
             data.map((order, i) => {
               return (
                 <Table size="sm" className="border-2" key={i}>
                   <Thead className="bg-gray-200">
                     <Tr>
-                      <Th>Order#</Th>
+                      <Th>Order#{i + 1}</Th>
                       <Th>Order-Title</Th>
                       <Th>Order-Quantity</Th>
                       <Th>Order-Status</Th>
                       <Th>Order-Date</Th>
                       <Th>Total-Price</Th>
-                      <Th>
-                        <button className=" bg-gray-400 hover:bg-gray-600  text-white py-2 px-2  ml-3 rounded  font-semibold text-[16px]">
+                      <Th isNumeric>
+                        <button className=" bg-gray-400 hover:bg-gray-600  text-white py-2 px-2  ml-3 rounded  font-semibold text-[16px]" onClick={onOpen} onClickCapture={()=>setOrderID(order.bill_id)}>
                           {" "}
                           Cancel Order
                         </button>
@@ -53,7 +68,7 @@ const TrackOrder = () => {
                     </Tr>
                   </Thead>
                   <Tbody className="bg-white">
-                    <TableRow order={order}/>
+                    <TableRow order={order} />
                   </Tbody>
                   <Tfoot></Tfoot>
                 </Table>
@@ -61,6 +76,7 @@ const TrackOrder = () => {
             })}
         </TableContainer>
       </div>
+     <OrderRemovalForm onClose={onClose} onOpen={onOpen} isOpen={isOpen} orderID={OrderID} removeOrder={removeOrder} toast = {toast}/>
     </div>
   );
 };
@@ -71,7 +87,7 @@ export const TableRow = ({ order }) => {
   return (
     <>
       {order.purchase_record.map((e, i) => (
-        <Tr key={i+1}>
+        <Tr key={i + 1}>
           {/* Items# */}
           <Td>{i + 1}</Td>
           {/* Order Title */}
@@ -94,6 +110,59 @@ export const TableRow = ({ order }) => {
           <Td></Td>
         </Tr>
       ))}
+    </>
+  );
+};
+
+export const OrderRemovalForm = ({onOpen, onClose,isOpen, orderID, removeOrder, toast}) => {
+
+    const onRemoveOrder = async () =>{
+        try
+        {
+            const payload = await removeOrder({orderID}).unwrap()
+            toast({
+                title: `Order Cancelled Successfully!`,
+                status: "success",
+                isClosable: true,
+                position: "top",
+                duration: 4000,
+              });
+              console.log(payload)
+        }
+        catch(err)
+        {
+            toast({
+                title: `Order Cancellation failed!`,
+                status: "warning",
+                isClosable: true,
+                position: "top",
+                duration: 4000,
+              });
+        }
+    }
+  return (
+    <>
+      
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Order Cancellation</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+           <p className="text-lg">Do you want to cancel order?</p>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="red" variant={'ghost'} mr={3} onClickCapture={onClose} onClick={onRemoveOrder}>
+              Cancel Order
+            </Button>
+            <Button colorScheme="blackAlpha" variant={"ghost"} mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

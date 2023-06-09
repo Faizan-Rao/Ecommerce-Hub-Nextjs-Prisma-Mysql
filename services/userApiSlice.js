@@ -34,6 +34,7 @@ export const userApi = createApi({
         `/User_Orders?customer_id=${customer_id}`,
       providesTags: ['prod_Tran'],
     }),
+    
     dynamicSearch: builder.query({
       query: ({ search, minPrice, maxPrice }) =>
         `/User_DynamicSearch?search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
@@ -60,9 +61,18 @@ export const userApi = createApi({
         body,
       }),
     }),
+    
     UserProductTran: builder.mutation({
       query: (body) => ({
         url: `/User_ProductTransaction`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags:['prod_Tran']
+    }),
+    removeOrder: builder.mutation({
+      query: (body) => ({
+        url: `/User_Orders`,
         method: "POST",
         body,
       }),
@@ -88,4 +98,5 @@ export const {
   useUserFeedbackMutation,
   useUserProductTranMutation,
   useGetOrdersQuery,
+  useRemoveOrderMutation,
 } = userApi;
