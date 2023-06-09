@@ -10,8 +10,9 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useUserProductTranMutation } from "@/services/userApiSlice";
+import { emptyCart } from "@/services/LocalSlices/CartLocalSlice";
 
 const CheckoutForm = ({
   isOpen,
@@ -27,6 +28,8 @@ const CheckoutForm = ({
   const cart = useSelector((state) => state.cart.value);
   const toast = useToast();
   const user = useSelector((state) => state.user.data);
+  const dispatch  = useDispatch();
+
   // Checkout Product Procedure
   const CheckoutProduct = async (data) => {
     // calculate total Price for Each record
@@ -74,7 +77,7 @@ const CheckoutForm = ({
         position: "top",
         duration: 4000,
       });
-      
+      dispatch(emptyCart())
     } catch (err) {
       toast({
         title: `Transaction Failed!`,
@@ -133,6 +136,7 @@ const CheckoutForm = ({
                 type="submit"
                 className="mr-3 py-1 px-3 bg-gray-200 rounded cursor-pointer hover:text-[#3ba33b]"
                 value={"Checkout"}
+                onClick={onClose}
               />
             </div>
           </form>

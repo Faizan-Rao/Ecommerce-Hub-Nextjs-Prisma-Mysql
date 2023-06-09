@@ -6,7 +6,7 @@ export const userApi = createApi({
   
 
   baseQuery: fetchBaseQuery({ baseUrl: "/api/User" }),
-  
+  tagTypes:['prod_Tran'],
   endpoints: (builder) => ({
     getRecommended: builder.query({
       query: () => `/User_getPopularProduct`,
@@ -32,6 +32,7 @@ export const userApi = createApi({
     getOrders: builder.query({
       query: (customer_id) =>
         `/User_Orders?customer_id=${customer_id}`,
+      providesTags: ['prod_Tran'],
     }),
     dynamicSearch: builder.query({
       query: ({ search, minPrice, maxPrice }) =>
@@ -65,6 +66,7 @@ export const userApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags:['prod_Tran']
     }),
     
   }),

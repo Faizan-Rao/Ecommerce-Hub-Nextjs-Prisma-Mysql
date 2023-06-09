@@ -33,7 +33,8 @@ const TrackOrder = () => {
         {/* Table For Order Items */}
         <TableContainer className="flex gap-8">
           {!isLoading &&
-            data.map((order, i) =>  (
+            data.map((order, i) => {
+              return (
                 <Table size="sm" className="border-2" key={i}>
                   <Thead className="bg-gray-200">
                     <Tr>
@@ -52,36 +53,12 @@ const TrackOrder = () => {
                     </Tr>
                   </Thead>
                   <Tbody className="bg-white">
-                    {order.purchase_record.map((e, i) => (
-                      <Tr key={i}>
-                        {/* Items# */}
-                        <Td>{i + 1}</Td>
-                        {/* Order Title */}
-                        <Td className="text-gray-500 text-lg font-semibold">
-                          {e.purchase_title}
-                        </Td>
-                        {/* Order Quantity  */}
-                        <Td className=" flex justify-center item-center  font-semibold">
-                          {e.purchase_quantity}
-                        </Td>
-                        {/* Order Status*/}
-                        <Td>{e.purchase_status}</Td>
-                        {/* Order Date */}
-                        <Td>{e.purchase_date.toString().split("T")[0]}</Td>
-                        {/* Total Price */}
-                        <Td isNumeric>
-                          <span className="text-gray-500">
-                            ${e.purchase_amount}
-                          </span>
-                        </Td>
-                        {/* Cancellation Button */}
-                      </Tr>
-                    ))}
+                    <TableRow order={order}/>
                   </Tbody>
                   <Tfoot></Tfoot>
                 </Table>
-              )
-            )}
+              );
+            })}
         </TableContainer>
       </div>
     </div>
@@ -89,3 +66,34 @@ const TrackOrder = () => {
 };
 
 export default TrackOrder;
+
+export const TableRow = ({ order }) => {
+  return (
+    <>
+      {order.purchase_record.map((e, i) => (
+        <Tr key={i+1}>
+          {/* Items# */}
+          <Td>{i + 1}</Td>
+          {/* Order Title */}
+          <Td className="text-gray-500 text-lg font-semibold">
+            {e.purchase_title}
+          </Td>
+          {/* Order Quantity  */}
+          <Td className=" flex justify-center item-center  font-semibold">
+            {e.purchase_quantity}
+          </Td>
+          {/* Order Status*/}
+          <Td>{e.purchase_status}</Td>
+          {/* Order Date */}
+          <Td>{e.purchase_date.toString().split("T")[0]}</Td>
+          {/* Total Price */}
+          <Td isNumeric>
+            <span className="text-gray-500">${e.purchase_amount}</span>
+          </Td>
+          {/* Cancellation Button */}
+          <Td></Td>
+        </Tr>
+      ))}
+    </>
+  );
+};
