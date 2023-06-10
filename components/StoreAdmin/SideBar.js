@@ -9,15 +9,16 @@ import {
   DrawerFooter,
   Button,
 } from "@chakra-ui/react";
-import { BsFillArrowUpCircleFill } from "react-icons/bs";
+import { BsFillArrowUpCircleFill,BsFillPersonFill,BsFillBasketFill } from "react-icons/bs";
+import {BiCategory} from 'react-icons/bi'
+import {FaStore, FaProductHunt} from 'react-icons/fa'
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Link from "next/link";
 
 const SideBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const store = useSelector(state => state.user.store)
   const dispatch = useDispatch();
 
   return (
@@ -36,44 +37,51 @@ const SideBar = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton color={"green.700"} mt={2} />
-          <DrawerHeader fontSize={"xl"}>USER-PANEL</DrawerHeader>
+          <DrawerHeader fontSize={"xl"}>STORE-PANEL</DrawerHeader>
 
           <DrawerBody overflow={"auto"}>
             {/* Drawer Links */}
-            <ul className="flex justify-center items-center flex-col min-h-[600px] gap-9">
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50% hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+            <ul className="flex justify-center  flex-col min-h-[600px] gap-9">
+             { !store ? <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+                <Link href={"main"} className="flex justify-between items-center gap-8">
+                  <FaStore className="text-2xl" />{" "}
+                  <span>Store</span>
+                </Link>
+              </li>
+              :
+              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+                <Link href={"main"} className="flex justify-between items-center gap-8">
+                  <FaStore className="text-2xl" />{" "}
+                  <span>{"User-Store"}</span>
+                </Link>
+              </li>}
+              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
                 <button href={"#"} className="flex justify-between items-center gap-8">
-                  <BsFillArrowUpCircleFill className="text-xl" />{" "}
+                  <BsFillPersonFill className="text-2xl" />{" "}
                   <span>Profile</span>{" "}
                 </button>
               </li>
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50% hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
                 <Link href={"#"} className="flex justify-between items-center gap-8">
-                  <BsFillArrowUpCircleFill className="text-xl" />{" "}
-                  <span>Stores</span>
-                </Link>
-              </li>
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50% hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"#"} className="flex justify-between items-center gap-8">
-                  <BsFillArrowUpCircleFill className="text-xl" />{" "}
+                  <BsFillBasketFill className="text-2xl" />{" "}
                   <span>Orders</span>
                 </Link>
               </li>
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50% hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
                 <Link href={"#"} className="flex justify-between items-center gap-8">
-                  <BsFillArrowUpCircleFill className="text-xl" />{" "}
+                  <BiCategory className="text-2xl" />{" "}
                   <span>Categories</span>
                 </Link>
               </li>
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50% hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
                 <Link href={"#"} className="flex justify-between items-center gap-8">
-                  <BsFillArrowUpCircleFill className="text-xl" />{" "}
+                  <BiCategory className="text-2xl" />{" "}
                   <span>SubCategory</span>{" "}
                 </Link>
               </li>
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50% hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
                 <Link href={"#"} className="flex justify-between items-center gap-8">
-                  <BsFillArrowUpCircleFill className="text-xl" />{" "}
+                  <FaProductHunt className="text-xl" />{" "}
                   <span>Products</span>
                 </Link>
               </li>
