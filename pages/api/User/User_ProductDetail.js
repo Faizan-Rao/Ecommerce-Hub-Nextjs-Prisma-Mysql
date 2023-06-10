@@ -16,12 +16,12 @@ export default async function handler(req, res) {
       values = [prodId];
       let ratings = await ExecuteQuery({ query, values });
 
-      console.log(ratings);
+     
 
       if (ratings.length > 0 && result.length > 0) {
         result = { ...result[0], ["avg_rating"]: ratings[0].avg_rating };
       }
-      console.log(result);
+      
 
       if (result.length !== 0) {
         return res.json({
@@ -42,8 +42,7 @@ export default async function handler(req, res) {
         if (ratings.length > 0 && result.length > 0) {
           result = { ...result[0], ["avg_rating"]: ratings[0].avg_rating };
         }
-        console.log(ratings);
-        console.log(result);
+        
         return res.json({
           status: "success",
           data: [result],

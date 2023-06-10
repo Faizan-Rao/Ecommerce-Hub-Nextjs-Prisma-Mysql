@@ -75,7 +75,7 @@ const Navbar = () => {
         {/* Store Link */}
         {isLoggedIn && (
           <Button variant="solid" colorScheme="green">
-            <Link href={"#"}> Your Store</Link>
+            <Link href={"/StoreAdmin/main"}> Your Store</Link>
           </Button>
         )}
       </div>

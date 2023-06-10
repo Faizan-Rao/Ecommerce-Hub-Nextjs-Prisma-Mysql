@@ -10,11 +10,12 @@ import Footer from "@/components/User/Footer";
 import { useState } from "react";
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react'
 import Head from "next/head";
+import SideBar from "@/components/StoreAdmin/SideBar";
 
 export default function App({ Component, pageProps }) {
   const path = useRouter().pathname;
   const {cart, setCart} = useState(["Product"]);
-  
+
   return (
     <>
     <Head>
@@ -28,10 +29,11 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </Provider>
         </ChakraProvider>
-      ) : path.includes("/storeAdmin") ? (
+      ) : path.includes("/StoreAdmin") ? (
         // Store Admin Interfaces
         <ChakraProvider>
         <Provider store={store}>
+          <SideBar/>
           <Component {...pageProps} />
         </Provider>
         </ChakraProvider>
