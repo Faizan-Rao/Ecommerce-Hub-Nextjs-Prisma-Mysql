@@ -16,9 +16,17 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import {useForm} from "react-hook-form"
+import { useSelector } from "react-redux";
+import TrackOrder from "@/components/StoreAdmin/TrackOrder";
+import { useSgetOrdersQuery, useSgetRevenueQuery } from "@/services/sadminApiSlice";
 
 const StoreAdmin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const store_id = useSelector((state) => state.user.store.store_id);
+  const { data:revenue } = useSgetRevenueQuery({  store_id });
+  const { data:orders, } = useSgetOrdersQuery({  store_id });
+  const store = useSelector(state => state.user.store) 
+  console.log(orders)
   return (
     <>
       <div className="flex flex-col  justify-center items-center gap-8 m-5">
@@ -27,21 +35,22 @@ const StoreAdmin = () => {
         </h1>
         {/* Data ICONS */}
         <div className="flex justify-center items-center gap-8 flex-wrap m-5">
-          <div className="text-2xl font-bold bg-white gap-5 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BsFillBasketFill /> <span>Orders</span>
+          <div className="text-2xl font-bold bg-white gap-2 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
+            <BsFillBasketFill /> <span className="bg-slate-200 font-semibold p-2 rounded-full shadow-md">{orders?.orders.length || 0}</span> <span>Orders</span>
           </div>
-          <div className="text-2xl font-bold bg-white gap-5 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BsCurrencyDollar /> <span>Revenue</span>
+          <div className="text-2xl font-bold bg-white gap-2 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
+            <BsCurrencyDollar /><span className="bg-slate-200 font-semibold p-2 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span>Revenue</span>
           </div>
-          <div className="text-2xl font-bold bg-white gap-5 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <FaProductHunt /> <span>Products</span>
+          <div className="text-2xl font-bold bg-white gap-2 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
+            <FaProductHunt /><span className="bg-slate-200 font-semibold p-2 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span >Products</span>
           </div>
-          <div className="text-2xl font-bold bg-white gap-5 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BiCategory /> <span>Categories</span>
+          <div className="text-2xl font-bold bg-white gap-2 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
+            <BiCategory /><span className="bg-slate-200 font-semibold p-2 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span>Categories</span>
           </div>
         </div>
       </div>
       {/* Store and Profile */}
+      { !store && 
       <div className="flex flex-col  justify-center items-center gap-8 m-5">
         <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
           Your Store
@@ -57,8 +66,17 @@ const StoreAdmin = () => {
             <span>Create Store</span>
           </Button>
         </div>
-        <StoreCheckoutForm isOpen={isOpen} onClose={onClose} onOpen={onOpen}/>
+        <StoreCheckoutForm isOpen={isOpen} onClose={onClose} onOpen={onOpen}/> 
       </div>
+      }
+      {
+        store && <div className="flex flex-col  justify-center items-center gap-8 m-5">
+        <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
+          Your Orders
+        </h1>
+        <TrackOrder/>
+        </div>
+      }
     </>
   );
 };

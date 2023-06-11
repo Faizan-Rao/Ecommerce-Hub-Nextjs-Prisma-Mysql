@@ -50,7 +50,7 @@ const TrackOrder = () => {
           {!isLoading &&
             data.map((order, i) => {
               return (
-                <Table size="sm" className="border-2" key={i}>
+               order.purchase_record.length > 0 && <Table size="sm" className="border-2" key={i}>
                   <Thead className="bg-gray-200">
                     <Tr>
                       <Th>Order#{i + 1}</Th>
@@ -95,7 +95,7 @@ export const TableRow = ({ order }) => {
             {e.purchase_title}
           </Td>
           {/* Order Quantity  */}
-          <Td className=" flex justify-center item-center  font-semibold">
+          <Td className=" font-semibold" isNumeric >
             {e.purchase_quantity}
           </Td>
           {/* Order Status*/}

@@ -2,20 +2,23 @@ const {PrismaClient} =  require("@prisma/client")
 const prisma = new PrismaClient();
 
 const main = async () =>{
-    const PR_response = await prisma.billing.findMany({
+    const Orders = await prisma.purchase_record.findMany({
         where:{
-          customer_id: 1
+          store_id : 2,
         },
-        include:{
-          purchase_record:{
-            where:{
-              purchase_id: 60,
-            }
-
-          }
-        }
+        
       })
-      console.dir(PR_response,{depth: null})
+      let revenue = Orders.reduce((totalData, item)=>{
+        totalData.totalRevenue += item.purchase_amount;
+        return totalData
+      },{
+        totalRevenue: 0,
+      })
+      console.log(revenue)
+      console.dir(Orders, revenue,{depth: null})
+
+    
+  
 }
 
 main()

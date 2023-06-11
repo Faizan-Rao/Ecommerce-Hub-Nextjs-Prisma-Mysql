@@ -1,5 +1,6 @@
 import { prisma } from "@/script";
 
+
 // Interface : User
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -24,10 +25,11 @@ export default async function handler(req, res) {
 
         // Generated Bill
         const bill_id = newBill.bill_id;
-
+        
         const DataToSend = cart.map((e) => {
           if (e.purchase_quantity > 0) {
             return {
+              store_id: e.store_id,
               purchase_amount: e.purchase_amount,
               purchase_quantity: e.purchase_quantity,
               purchase_title: e.purchase_title,
@@ -43,7 +45,6 @@ export default async function handler(req, res) {
         const response = await prisma.purchase_record.createMany({
           data: DataToSend,
         });
-        
 
         // Disconnect from the database and return response
         await prisma.$disconnect();

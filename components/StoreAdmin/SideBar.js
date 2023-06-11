@@ -18,9 +18,8 @@ import Link from "next/link";
 
 const SideBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const store = useSelector(state => state.user.store)
   const dispatch = useDispatch();
-
+  const store = useSelector(state => state.user.store)
   return (
     <div>
       {/* Cart Button */}
@@ -52,7 +51,7 @@ const SideBar = () => {
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
                 <Link href={"main"} className="flex justify-between items-center gap-8">
                   <FaStore className="text-2xl" />{" "}
-                  <span>{"User-Store"}</span>
+                  <span>{store.store_name}</span>
                 </Link>
               </li>}
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">

@@ -27,9 +27,10 @@ const getOrder = async (req) =>{
         // Get-Orders By Customer Id
         const Orders = await prisma.billing.findMany({
             where:{
-                customer_id: {
-                    equals: id
-                }
+               
+              customer_id:id,
+             
+                
             },
             select:{
                 purchase_record: {
@@ -63,22 +64,24 @@ const removeOrder = async (req) => {
         await prisma.$connect();
         const {orderID} = req.body;
         const id = parseInt(orderID)
-        console.log(orderID)
+        
         // Get-Orders By Customer Id
-        const Orders = await prisma.billing.delete({
+        const Orders = await prisma.purchase_record.deleteMany({
             where:{
-                bill_id: orderID
-            },
-            select:{
-                purchase_record:{
-                    where:{
-                        bill_id : orderID
+                AND:[
+                    {
+                        bill_id: orderID,
+                        
                     },
-                }
-            }
+                    {
+                        purchase_status: 'full-filled'
+                    }
+                ]
+            },
+           
                 
         })
-        console.log(Orders)
+       
         await prisma.$disconnect()
         return Orders
       
@@ -87,7 +90,7 @@ const removeOrder = async (req) => {
     {
         await prisma.$disconnect()
         // res.status(400).json({status: "error", message:err.message})
-        console.log
+        
        return null
     }
 }

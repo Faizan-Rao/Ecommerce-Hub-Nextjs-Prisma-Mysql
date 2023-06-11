@@ -37,6 +37,7 @@ const CheckoutForm = ({
       (e) => {
         if (e.product_qty >= 0) {
           return {
+            store_id : e.store_id,
             purchase_amount: e.product_qty * e.product_price,
             purchase_quantity: e.product_qty,
             purchase_title: e.product_title,
@@ -47,6 +48,7 @@ const CheckoutForm = ({
           };
         }
         return {
+          store_id : e.store_id,
           purchase_amount:  e.product_price,
           purchase_quantity: e.product_qty,
           purchase_title: e.product_title,

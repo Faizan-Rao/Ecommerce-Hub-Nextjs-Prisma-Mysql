@@ -3,7 +3,8 @@ import Link from "next/link";
 import React from "react";
 import { useToast } from '@chakra-ui/react'
 import { useDispatch } from "react-redux";
-import { setUser } from "@/services/LocalSlices/UserLocalSlice";
+import { setStore, setUser } from "@/services/LocalSlices/UserLocalSlice";
+import { useGetStoreMutation } from "@/services/sadminApiSlice";
 
 const LoginForm = ({
   email,
@@ -17,6 +18,7 @@ const LoginForm = ({
 
   const dispatch = useDispatch();
   const [UserLogin] = useUserLoginMutation();
+  const [GetStore] = useGetStoreMutation();
   const toast = useToast()
 
   const onUserLoginCall = async (data) => {
@@ -31,6 +33,9 @@ const LoginForm = ({
         position: 'top',
         duration: 4000,
       })
+      const customer_login = response.data.customer_login
+      const store = await GetStore({customer_login }).unwrap()
+      dispatch(setStore(store))
       dispatch(setUser(response.data))
       reset()
     }
