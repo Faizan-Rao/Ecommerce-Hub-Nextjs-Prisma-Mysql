@@ -10,6 +10,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Button,
 } from "@chakra-ui/react";
 
 const Sorders = () => {
@@ -34,14 +35,15 @@ const Sorders = () => {
                       <Th>Total-Price</Th>
                       <Th>Bill-ID</Th>
                       <Th>
-                      <button
+                      <Button
+                        variant={'solid'} colorScheme="blackAlpha" size={'sm'}
                           className=" bg-gray-400 hover:bg-gray-600  text-white py-2 px-2  ml-3 rounded  font-semibold text-[16px]"
                          
                           onClickCapture={() => onDispatchOrder(e.purchase_id)}
                         >
                           {" "}
                           Clear ALL
-                        </button>
+                        </Button>
                       </Th>
                     </Tr>
                   </Thead>
