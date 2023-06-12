@@ -35,17 +35,17 @@ const StoreAdmin = () => {
         </h1>
         {/* Data ICONS */}
         <div className="flex justify-center items-center gap-8 flex-wrap m-5">
-          <div className="text-2xl font-bold bg-white gap-2 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BsFillBasketFill /> <span className="bg-slate-200 font-semibold p-2 rounded-full shadow-md">{orders?.orders.length || 0}</span> <span>Orders</span>
+          <div className="text-2xl font-bold bg-gray-500 gap-2 text-gray-100 min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
+            <BsFillBasketFill /> <span className="bg-slate-200 text-gray-600 font-semibold p-4 rounded-full shadow-md">{orders?.orders.length || 0}</span> <span>Orders</span>
           </div>
-          <div className="text-2xl font-bold bg-white gap-2 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BsCurrencyDollar /><span className="bg-slate-200 font-semibold p-2 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span>Revenue</span>
+          <div className="text-2xl font-bold bg-green-500 gap-2 text-gray-100 min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
+            <BsCurrencyDollar /><span className="bg-slate-200 text-gray-600 font-semibold p-4 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span>Revenue</span>
           </div>
-          <div className="text-2xl font-bold bg-white gap-2 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <FaProductHunt /><span className="bg-slate-200 font-semibold p-2 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span >Products</span>
+          <div className="text-2xl font-bold bg-green-500 gap-2 text-gray-100 min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
+            <FaProductHunt /><span className="bg-slate-200 text-gray-600 font-semibold p-4 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span >Products</span>
           </div>
-          <div className="text-2xl font-bold bg-white gap-2 text-[#3ba33b] min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BiCategory /><span className="bg-slate-200 font-semibold p-2 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span>Categories</span>
+          <div className="text-2xl font-bold bg-green-500 gap-2 text-gray-100 min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
+            <BiCategory /><span className="bg-slate-200 text-gray-600 font-semibold p-4 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span>Categories</span>
           </div>
         </div>
       </div>
