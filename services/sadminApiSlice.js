@@ -10,12 +10,12 @@ export const sadminApi = createApi({
     SgetOrders: builder.query({
       query: ({ customer_id, store_id }) =>
         `/Sadmin-Orders?store_id=${store_id}&customer_id=${customer_id}`,
-        providesTags: ["dispatch"]
+      providesTags: ["dispatch"],
     }),
     SgetRevenue: builder.query({
       query: ({ customer_id, store_id }) =>
         `/Sadmin-getRevenue?store_id=${store_id}`,
-        providesTags: ["dispatch"]
+      providesTags: ["dispatch"],
     }),
     getStore: builder.mutation({
       query: (body) => ({
@@ -30,16 +30,32 @@ export const sadminApi = createApi({
         method: "PUT",
         body,
       }),
-      invalidatesTags:["dispatch"]
+      invalidatesTags: ["dispatch"],
     }),
-    
+    updateProfile: builder.mutation({
+      query: (body) => ({
+        url: `/Sadmin-updateProfile`,
+        method: "POST",
+        body,
+      }),
+    }),
+    updateStore: builder.mutation({
+      query: (body) => ({
+        url: `/Sadmin-updateStore`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
-  
-})
-
+});
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useDispatchOrderMutation,useGetStoreMutation,
-   useSgetOrdersQuery,
-  useSgetRevenueQuery } = sadminApi;
+export const {
+  useDispatchOrderMutation,
+  useGetStoreMutation,
+  useSgetOrdersQuery,
+  useSgetRevenueQuery,
+  useUpdateProfileMutation,
+  useUpdateStoreMutation,
+} = sadminApi;

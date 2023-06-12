@@ -42,44 +42,44 @@ const SideBar = () => {
             {/* Drawer Links */}
             <ul className="flex justify-center  flex-col min-h-[600px] gap-9">
              { !store ? <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"main"} className="flex justify-between items-center gap-8">
+                <Link href={"main"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <FaStore className="text-2xl" />{" "}
                   <span>Store</span>
                 </Link>
               </li>
               :
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"main"} className="flex justify-between items-center gap-8">
+                <Link href={"main"}  onClick={onClose} className="flex justify-between items-center gap-8">
                   <FaStore className="text-2xl" />{" "}
                   <span>{store.store_name}</span>
                 </Link>
               </li>}
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <button href={"#"} className="flex justify-between items-center gap-8">
+                <Link href={"s-profile"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <BsFillPersonFill className="text-2xl" />{" "}
-                  <span>Profile</span>{" "}
-                </button>
+                  <span>Edit Profile & Store</span>{" "}
+                </Link>
               </li>
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"#"} className="flex justify-between items-center gap-8">
+                <Link href={"#"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <BsFillBasketFill className="text-2xl" />{" "}
                   <span>Orders</span>
                 </Link>
               </li>
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"#"} className="flex justify-between items-center gap-8">
+                <Link href={"#"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <BiCategory className="text-2xl" />{" "}
                   <span>Categories</span>
                 </Link>
               </li>
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"#"} className="flex justify-between items-center gap-8">
+                <Link href={"#"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <BiCategory className="text-2xl" />{" "}
                   <span>SubCategory</span>{" "}
                 </Link>
               </li>
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"#"} className="flex justify-between items-center gap-8">
+                <Link href={"#"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <FaProductHunt className="text-xl" />{" "}
                   <span>Products</span>
                 </Link>

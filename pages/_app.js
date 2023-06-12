@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }) {
         <Provider store={store}>
           <SideBar/>
           <Component {...pageProps} />
+          <Footer/>
         </Provider>
         </ChakraProvider>
       ) : (
