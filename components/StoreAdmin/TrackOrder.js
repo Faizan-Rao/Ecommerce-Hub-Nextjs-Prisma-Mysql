@@ -66,9 +66,8 @@ const TrackOrder = () => {
     }
   };
   return (
-    <div className="flex justify-between gap-1 flex-wrap  ">
-      <div className="m-5 overflow-auto flex flex-col justify-center ">
-        {/* Table For Order Items */}
+    
+      
         <TableContainer>
          
                 <Table size="sm" className="border-2" >
@@ -127,9 +126,8 @@ const TrackOrder = () => {
               
             
         </TableContainer>
-      </div>
-      
-    </div>
+
+   
   );
 };
 

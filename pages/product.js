@@ -24,14 +24,14 @@ const Products = () => {
   return (
     <>
       {/* Product Searching */}
-      <div className="flex item-center justify-center gap-8 flex-wrap m-5">
-        <div className="flex items-center gap-2">
+      <div className="flex  item-center text-lg  font-semibold p-5 rounded-full justify-center gap-8 flex-wrap m-5">
+        <div className="flex justify-center items-center  gap-2">
           {" "}
           <span>Search: </span>
           <input
             type="search"
             onChange={handleChange}
-            className="p-1 rounded-lg outline-none inline-block border-2"
+            className="p-2 rounded-lg outline-none inline-block border-2"
             name="search"
             id="search"
             placeholder="Search"
@@ -42,7 +42,7 @@ const Products = () => {
           <span>Min: </span>
           <input
             type="number"
-            className="p-1 rounded-lg outline-none inline-block border-2"
+            className="p-2 rounded-lg outline-none inline-block border-2"
             onChange={handleChange}
             name="minPrice"
             placeholder="0"
@@ -54,7 +54,7 @@ const Products = () => {
           <span>Max: </span>
           <input
             type="number"
-            className="p-1 rounded-lg outline-none inline-block border-2"
+            className="p-2 rounded-lg outline-none inline-block border-2"
             onChange={handleChange}
             name="maxPrice"
             placeholder="0"
@@ -64,12 +64,12 @@ const Products = () => {
         </div>
       </div>
       {/* All Product Grid */}
-      <div className="m-5 ">
+      <div className="m-5 flex justify-center items-center flex-col ">
         <h1 className="text-3xl p-5">Products</h1>
       </div>
       {SearchProduct?.data?.length <= 0 && (
         <div
-          className={"flex items-center justify-around flex-wrap gap-4 my-4 "}
+          className={"flex items-center justify-center flex-wrap gap-4 my-4 "}
         >
           {isLoadingAll ? (
             <p>Loading</p>
@@ -82,7 +82,7 @@ const Products = () => {
       )}
       {SearchProduct && (
         <div
-          className={"flex items-center justify-around  flex-wrap gap-4 my-4 "}
+          className={"flex items-center justify-center  flex-wrap gap-4 my-4  "}
         >
           {isLoadingSearch ? (
             <p>Loading</p>

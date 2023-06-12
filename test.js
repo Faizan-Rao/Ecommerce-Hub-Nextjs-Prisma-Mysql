@@ -4,7 +4,6 @@ const prisma = new PrismaClient();
 const main = async () =>{
  
 
-
     
   
 }

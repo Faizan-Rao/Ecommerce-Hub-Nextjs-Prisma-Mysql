@@ -17,6 +17,11 @@ export const sadminApi = createApi({
         `/Sadmin-getRevenue?store_id=${store_id}`,
       providesTags: ["dispatch"],
     }),
+    SgetDispatchOrder: builder.query({
+      query: () =>
+        `/Sadmin-getDispatchOrders`,
+      providesTags: ["dispatch"],
+    }),
     getStore: builder.mutation({
       query: (body) => ({
         url: `/Sadmin-getStore`,
@@ -58,4 +63,5 @@ export const {
   useSgetRevenueQuery,
   useUpdateProfileMutation,
   useUpdateStoreMutation,
+  useSgetDispatchOrderQuery
 } = sadminApi;

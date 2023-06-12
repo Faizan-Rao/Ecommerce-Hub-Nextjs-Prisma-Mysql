@@ -41,10 +41,10 @@ const Navbar = () => {
       )}
 
       {/* Navbar */}
-      <div className="flex justify-between items-center  p-4 bg-gray-100 flex-wrap">
+      <div className="flex justify-between items-center  p-4 bg-white flex-wrap">
         <div className="text-3xl">Bizworld</div>
         <div>
-          <ul className="flex justify-between items-center  my-4  ">
+          <ul className="flex justify-between items-center text-[17px]  my-4  ">
             <li className="mr-3 ">
               <Link className="mx-3 hover:text-[#3ba33b]" href={"/"}>
                 Home

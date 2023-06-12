@@ -29,30 +29,30 @@ const StoreAdmin = () => {
   console.log(orders)
   return (
     <>
-      <div className="flex flex-col  justify-center items-center gap-8 m-5">
+      <div className=" flex justify-center items-center flex-col  gap-5 m-5">
         <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
           Dashboard
         </h1>
         {/* Data ICONS */}
-        <div className="flex justify-center items-center gap-8 flex-wrap m-5">
-          <div className="text-2xl font-bold bg-gray-500 gap-2 text-gray-100 min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BsFillBasketFill /> <span className="bg-slate-200 text-gray-600 font-semibold p-4 rounded-full shadow-md">{orders?.orders.length || 0}</span> <span>Orders</span>
+        <div className="flex justify-center items-center  gap-8 flex-wrap my-5">
+          <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
+            <BsFillBasketFill className="text-2xl" /> <span className="aspect-[7/4] text-center font-semibold p-4 rounded-full ">{orders?.orders.length || 0}</span> <span>Orders</span>
           </div>
-          <div className="text-2xl font-bold bg-green-500 gap-2 text-gray-100 min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BsCurrencyDollar /><span className="bg-slate-200 text-gray-600 font-semibold p-4 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span>Revenue</span>
+          <div className="text-2xl aspect-square font-bold  bg-white shadow-lg   text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
+            <BsCurrencyDollar  className="text-2xl"/><span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">{revenue?.revenue || 0}</span> <span>Revenue</span>
           </div>
-          <div className="text-2xl font-bold bg-green-500 gap-2 text-gray-100 min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <FaProductHunt /><span className="bg-slate-200 text-gray-600 font-semibold p-4 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span >Products</span>
+          <div className="text-2xl aspect-square font-bold bg-white shadow-lg   text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
+            <FaProductHunt  className="text-2xl"/><span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">{revenue?.revenue || 0}</span> <span >Products</span>
           </div>
-          <div className="text-2xl font-bold bg-green-500 gap-2 text-gray-100 min-h-[200px] rounded-xl shadow-lg px-9 flex justify-center items-center flex-col">
-            <BiCategory /><span className="bg-slate-200 text-gray-600 font-semibold p-4 rounded-full shadow-md">{revenue?.revenue || 0}</span> <span>Categories</span>
+          <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
+            <BiCategory  className="text-2xl"/><span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">{revenue?.revenue || 0}</span> <span>Categories</span>
           </div>
         </div>
       </div>
       {/* Store and Profile */}
       { !store && 
       <div className="flex flex-col  justify-center items-center gap-8 m-5">
-        <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
+        <h1 className="text-4xl  text-[#3ba33b] font-semibold">
           Your Store
         </h1>
         <div className="flex justify-center items-center gap-8 flex-wrap m-5">
@@ -70,7 +70,7 @@ const StoreAdmin = () => {
       </div>
       }
       {
-        store && <div className="flex flex-col  justify-center items-center gap-8 m-5">
+        store && <div className=" justify-center items-center flex flex-col gap-8 m-5">
         <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
           Your Orders
         </h1>

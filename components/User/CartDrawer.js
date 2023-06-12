@@ -75,7 +75,7 @@ const CartDrawer = () => {
               cart.map((e, i) => {
                 return (
                   <div key={i}>
-                    <div className="flex flex-col gap-2 justify-between my-5 bg-gray-200 p-4 rounded-lg">
+                    <div className="flex flex-col gap-2 justify-between my-5 bg-slate-100 p-4 rounded-lg">
                       <div className="text-gray-500 text-lg font-semibold">
                         {e.product_title}
                       </div>

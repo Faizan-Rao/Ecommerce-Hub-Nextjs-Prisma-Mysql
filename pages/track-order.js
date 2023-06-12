@@ -42,8 +42,8 @@ const TrackOrder = () => {
   const [OrderID, setOrderID] = useState(null)
     const toast = useToast()
   return (
-    <div className="flex justify-between gap-1 flex-wrap  ">
-      <div className="m-5 overflow-auto flex flex-col justify-center ">
+    <>
+      <div className="m-5 overflow-auto flex flex-col justify-center items-center">
         <h1 className="text-3xl p-5">Track Orders</h1>
         {/* Table For Order Items */}
         <TableContainer>
@@ -77,7 +77,7 @@ const TrackOrder = () => {
         </TableContainer>
       </div>
      <OrderRemovalForm onClose={onClose} onOpen={onOpen} isOpen={isOpen} orderID={OrderID} removeOrder={removeOrder} toast = {toast}/>
-    </div>
+    </>
   );
 };
 
