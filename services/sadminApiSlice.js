@@ -3,7 +3,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // Define a service using a base URL and expected endpoints
 export const sadminApi = createApi({
   reducerPath: "sadminApi",
+
   baseQuery: fetchBaseQuery({ baseUrl: "/api/StoreAdmin" }),
+
   tagTypes: ["store_Tran", "dispatch"],
 
   endpoints: (builder) => ({
@@ -21,6 +23,14 @@ export const sadminApi = createApi({
       query: () =>
         `/Sadmin-getDispatchOrders`,
       providesTags: ["dispatch"],
+    }),
+    SgetCategory: builder.query({
+      query: (s_id) =>
+        `/Sadmin-getCategories?s_id=${s_id}`,
+    }),
+    SgetSubcategory: builder.query({
+      query: (c_id) =>
+        `/Sadmin-getSubcategory?c_id=${c_id}`,
     }),
     getStore: builder.mutation({
       query: (body) => ({
@@ -61,7 +71,9 @@ export const {
   useGetStoreMutation,
   useSgetOrdersQuery,
   useSgetRevenueQuery,
+  useSgetCategoryQuery,
+  useSgetSubcategoryQuery,
+  useSgetDispatchOrderQuery,
   useUpdateProfileMutation,
   useUpdateStoreMutation,
-  useSgetDispatchOrderQuery
 } = sadminApi;

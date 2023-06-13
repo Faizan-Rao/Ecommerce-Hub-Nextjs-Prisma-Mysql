@@ -21,7 +21,7 @@ const getDispatchOrders = async (req) => {
             purchase_status: "dispatched"
         }
     })
-    console.log(d_Orders)
+    
     
 
     await prisma.$disconnect();
