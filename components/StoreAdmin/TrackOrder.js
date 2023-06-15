@@ -39,7 +39,9 @@ const TrackOrder = () => {
   const store_id = useSelector((state) => state.user.store.store_id);
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useSgetOrdersQuery({ customer_id, store_id });
+  const { data, isLoading } = useSgetOrdersQuery({ customer_id, store_id },{
+    pollingInterval:20000
+  });
   const [dispatchOrder] = useDispatchOrderMutation()
 
   const toast = useToast();
@@ -67,7 +69,7 @@ const TrackOrder = () => {
   };
   return (
     
-      
+      <>
         <TableContainer>
          
                 <Table size="sm" className="border-2" >
@@ -123,11 +125,11 @@ const TrackOrder = () => {
                   </Tbody>
                   <Tfoot></Tfoot>
                 </Table>
-              
             
-        </TableContainer>
-
-   
+          </TableContainer>
+              
+                
+   </>
   );
 };
 

@@ -1,7 +1,10 @@
 import {
+  useScreateSubCategoryMutation,
+  useSdeleteSubCategoryMutation,
   useSgetCategoryQuery,
   useSgetDispatchOrderQuery,
   useSgetSubcategoryQuery,
+  useSupdateSubCategoryMutation,
 } from "@/services/sadminApiSlice";
 import React from "react";
 import {
@@ -25,6 +28,7 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useToast
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -36,6 +40,11 @@ const Ssubcategory = () => {
   const id = useRouter().query.c_id;
   const { data, isLoading } = useSgetSubcategoryQuery(id);
   const [sID, setSID] = useState(0);
+  const toast = useToast()
+  // Mutations Subcategory
+  const [createSubcategory] = useScreateSubCategoryMutation()
+  const [updateSubcategory] = useSupdateSubCategoryMutation()
+  const [deleteSubcategory] = useSdeleteSubCategoryMutation()
 
   // MultiForm Disclosure
   const MultiFormsD = () => {
@@ -70,41 +79,92 @@ const Ssubcategory = () => {
       reset: reset2,
       formState: { errors: errors2 },
     },
-    {
-      register: register3,
-      handleSubmit: handleSubmit3,
-      reset: reset3,
-      formState: { errors: errors3 },
-    },
+    
   ] = MultiForms();
 
   // Create Subcategory Function
-  const onCreateSUBC = (data) => {
+  const onCreateSUBC = async (data) => {
     try {
       const subcData = {
         category_id: id,
         subcategory_title: data.subcategory_title,
       };
-      console.log(subcData);
+        const payload = await createSubcategory(subcData).unwrap();
+      toast({
+        title: `Subcategory Creation Sucessfull`,
+        status: "success",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+
       reset1();
-    } catch (err) {}
+    } catch (err) {
+      console.log(err.message);
+      toast({
+        title: `Category Creation Failed`,
+        status: "error",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+    }
   };
   // Update Subcategory Function
-  const onUpdateSUBC = (data) => {
+  const onUpdateSUBC = async (data) => {
     try {
       const subcData = {
         subcategory_id: sID,
-        subcategory_title: data.subcategory_title,
+        subcategory_title: data.subcategory_title || "",
       };
 
-      console.log(subcData);
+      const payload = await updateSubcategory(subcData).unwrap();
+      toast({
+        title: `Subcategory Updation Sucessfull`,
+        status: "success",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+
       reset2();
-    } catch (err) {}
+    } catch (err) {
+      console.log(err.message);
+      toast({
+        title: `Subcategory Updation Failed`,
+        status: "error",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+    }
   };
-  const onDeleteSUBC = () => {
+  const onDeleteSUBC = async () => {
     try {
-      console.log(data);
-    } catch (err) {}
+      const subcData = {
+        subcategory_id: sID,
+      };
+
+      const payload = await deleteSubcategory(subcData).unwrap();
+      toast({
+        title: `Subcategory Deletion Sucessfull`,
+        status: "success",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+
+      reset2();
+    } catch (err) {
+      console.log(err.message);
+      toast({
+        title: `Subcategory Deletion Failed`,
+        status: "error",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+    }
   };
   return (
     <>
@@ -177,7 +237,7 @@ const Ssubcategory = () => {
                             <Link
                               href={{
                                 pathname: "s-product",
-                                query: { s_id: e.subcategory_id  },
+                                query: { s_id: e.subcategory_id },
                               }}
                             >
                               {" "}
@@ -271,13 +331,12 @@ const Ssubcategory = () => {
               <ModalCloseButton />
               <ModalBody>
                 <p>
-                  Do you want to delete Subcategory? <br /> <b>NOTE</b> <br />{" "}
-                  This May also delete products.
+                  Do you want to delete Subcategory? 
                 </p>
               </ModalBody>
 
               <ModalFooter>
-                <Button onClick={onClose3} colorScheme="red" mr={3}>
+                <Button onClick={onClose3} onClickCapture={onDeleteSUBC} colorScheme="red" mr={3}>
                   Delete
                 </Button>
               </ModalFooter>

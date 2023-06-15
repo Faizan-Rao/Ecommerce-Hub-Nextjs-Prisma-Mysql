@@ -1,6 +1,8 @@
 import {
+  useScreateCategoryMutation,
+  useSdeleteCategoryMutation,
   useSgetCategoryQuery,
-  useSgetDispatchOrderQuery,
+  useSupdateCategoryMutation,
 } from "@/services/sadminApiSlice";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -27,11 +29,18 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 const Scategory = () => {
   const id = useSelector((state) => state.user.store.store_id);
   const { data, isLoading } = useSgetCategoryQuery(id);
-  const [sID, setSID] = useState(0);
+  const [C_ID, setCID] = useState(0);
+  const toast = useToast();
+  // Mutation for Category
+  const [createCategory] = useScreateCategoryMutation();
+  const [updateCategory] = useSupdateCategoryMutation();
+  const [deleteCategory] = useSdeleteCategoryMutation();
+
   // MultiForm Disclosure
   const MultiFormsD = () => {
     const Dform1 = useDisclosure();
@@ -68,32 +77,85 @@ const Scategory = () => {
   ] = MultiForms();
 
   // Create Subcategory Function
-  const onCreateSUBC = (data) => {
+  const onCreateC = async (data) => {
     try {
-      const subcData = {
-        category_id: id,
-        subcategory_title: data.subcategory_title,
+      const pData = {
+        category_title: data.category_title,
+        store_id: id,
       };
-      console.log(subcData);
+      const payload = await createCategory(pData).unwrap();
+      toast({
+        title: `Category Creation Sucessfull`,
+        status: "success",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+
       reset1();
-    } catch (err) {}
+    } catch (err) {
+      console.log(err.message);
+      toast({
+        title: `Category Creation Failed`,
+        status: "error",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+    }
   };
   // Update Subcategory Function
-  const onUpdateSUBC = (data) => {
+  const onUpdateC = async (data) => {
     try {
-      const subcData = {
-        subcategory_id: sID,
-        subcategory_title: data.subcategory_title,
+      const Data = {
+        category_title: data.category_title || "",
+        category_id: C_ID,
       };
+     
+      const payload = await updateCategory(Data).unwrap();
+      toast({
+        title: `Category Updation Sucessfull`,
+        status: "success",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
 
-      console.log(subcData);
       reset2();
-    } catch (err) {}
+    } catch (err) {
+      console.log(err.message);
+      toast({
+        title: `Category Creation Failed`,
+        status: "error",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+    }
   };
-  const onDeleteSUBC = () => {
+  const onDeleteC = async () => {
     try {
-      console.log(data);
-    } catch (err) {}
+      const cData = {
+        category_id: C_ID,
+      };
+      const payload = await deleteCategory(cData).unwrap();
+      toast({
+        title: `Category Deletion Sucessfull`,
+        status: "success",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+    } catch (err) {
+      console.log(err.message);
+      toast({
+        title: `Category Deletion Failed`,
+        status: "error",
+        isClosable: true,
+        position: "top",
+        duration: 4000,
+      });
+    }
   };
   return (
     <>
@@ -142,7 +204,7 @@ const Scategory = () => {
                             variant={"solid"}
                             colorScheme="green"
                             onClick={onOpen2}
-                            onClickCapture={() => setSID(e.subcategory_id)}
+                            onClickCapture={() => setCID(e.categories.category_id)}
                           >
                             Update
                           </Button>
@@ -152,7 +214,7 @@ const Scategory = () => {
                             variant={"solid"}
                             colorScheme="red"
                             onClick={onOpen3}
-                            onClickCapture={() => setSID(e.subcategory_id)}
+                            onClickCapture={() => setCID(e.categories.category_id)}
                           >
                             Delete
                           </Button>
@@ -185,23 +247,23 @@ const Scategory = () => {
           <Modal isOpen={isOpen1} onClose={onClose1}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Create Subcategory</ModalHeader>
+              <ModalHeader>Create Category</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <form
                   className="flex justify-center items-center gap-8 flex-col m-4"
-                  onSubmit={handleSubmit1(onCreateSUBC)}
+                  onSubmit={handleSubmit1(onCreateC)}
                 >
                   <input
                     type="text"
                     className="border-2 p-1 outline-none rounded-lg "
-                    placeholder="Enter Subcategory"
-                    {...register1("subcategory_title", {
+                    placeholder="Enter category"
+                    {...register1("category_title", {
                       required: true,
                       min: 4,
                     })}
                   />
-                  {errors1.subcategory_title && (
+                  {errors1.category_title && (
                     <span>This field is required</span>
                   )}
 
@@ -221,23 +283,22 @@ const Scategory = () => {
           <Modal isOpen={isOpen2} onClose={onClose2}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Update Subcategory</ModalHeader>
+              <ModalHeader>Update Category</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <form
                   className="flex justify-center items-center gap-8 flex-col m-4"
-                  onSubmit={handleSubmit2(onUpdateSUBC)}
+                  onSubmit={handleSubmit2(onUpdateC)}
                 >
                   <input
                     type="text"
                     className="border-2 p-1 outline-none rounded-lg "
-                    placeholder={`Update Subcategory`}
-                    {...register2("subcategory_title", {
-                      required: true,
+                    placeholder={`Update category`}
+                    {...register2("category_title", {
                       min: 4,
                     })}
                   />
-                  {errors1.subcategory_title && (
+                  {errors2.subcategory_title && (
                     <span>This field is required</span>
                   )}
 
@@ -261,13 +322,17 @@ const Scategory = () => {
               <ModalCloseButton />
               <ModalBody>
                 <p>
-                  Do you want to delete Subcategory? <br /> <b>NOTE</b> <br />{" "}
-                  This May also delete products.
+                  Do you want to delete Category? 
                 </p>
               </ModalBody>
 
               <ModalFooter>
-                <Button onClick={onClose3} colorScheme="red" mr={3}>
+                <Button
+                  onClick={onClose3}
+                  onClickCapture={onDeleteC}
+                  colorScheme="red"
+                  mr={3}
+                >
                   Delete
                 </Button>
               </ModalFooter>

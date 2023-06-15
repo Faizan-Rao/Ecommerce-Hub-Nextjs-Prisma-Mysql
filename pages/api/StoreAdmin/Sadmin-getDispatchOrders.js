@@ -16,9 +16,11 @@ export default async function handler(req, res) {
 const getDispatchOrders = async (req) => {
   try {
     await prisma.$connect();
+    const {store_id} = req.query
     const d_Orders = await prisma.purchase_record.findMany({
         where:{
-            purchase_status: "dispatched"
+            purchase_status: "dispatched",
+           store_id: parseInt(store_id)
         }
     })
     

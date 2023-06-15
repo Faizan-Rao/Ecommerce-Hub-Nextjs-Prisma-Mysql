@@ -15,86 +15,130 @@ import {
   useToast,
   useDisclosure,
 } from "@chakra-ui/react";
-import {useForm} from "react-hook-form"
-import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import TrackOrder from "@/components/StoreAdmin/TrackOrder";
-import { useSgetOrdersQuery, useSgetRevenueQuery } from "@/services/sadminApiSlice";
+import {
+  useCreateStoreMutation,
+  useSgetOrdersQuery,
+  useSgetRevenueQuery,
+} from "@/services/sadminApiSlice";
+import { setStore } from "@/services/LocalSlices/UserLocalSlice";
 
 const StoreAdmin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const store_id = useSelector((state) => state.user.store.store_id);
-  const { data:revenue } = useSgetRevenueQuery({  store_id });
-  const { data:orders, } = useSgetOrdersQuery({  store_id });
-  const store = useSelector(state => state.user.store) 
-  console.log(orders)
+  const { data: revenue } = useSgetRevenueQuery({ store_id });
+  const { data: orders } = useSgetOrdersQuery({ store_id });
+  const store = useSelector((state) => state.user.store);
+  console.log(orders);
   return (
     <>
-      <div className=" flex justify-center items-center flex-col  gap-5 m-5">
-        <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
-          Dashboard
-        </h1>
-        {/* Data ICONS */}
-        <div className="flex justify-center items-center  gap-8 flex-wrap my-5">
-          <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
-            <BsFillBasketFill className="text-2xl" /> <span className="aspect-[7/4] text-center font-semibold p-4 rounded-full ">{orders?.orders.length || 0}</span> <span>Orders</span>
-          </div>
-          <div className="text-2xl aspect-square font-bold  bg-white shadow-lg   text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
-            <BsCurrencyDollar  className="text-2xl"/><span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">{revenue?.revenue || 0}</span> <span>Revenue</span>
-          </div>
-          <div className="text-2xl aspect-square font-bold bg-white shadow-lg   text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
-            <FaProductHunt  className="text-2xl"/><span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">{revenue?.revenue || 0}</span> <span >Products</span>
-          </div>
-          <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
-            <BiCategory  className="text-2xl"/><span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">{revenue?.revenue || 0}</span> <span>Categories</span>
+      {store.store_id && (
+        <div className=" flex justify-center items-center flex-col  gap-5 m-5">
+          <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
+            Dashboard
+          </h1>
+          {/* Data ICONS */}
+          <div className="flex justify-center items-center  gap-8 flex-wrap my-5">
+            <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
+              <BsFillBasketFill className="text-2xl" />{" "}
+              <span className="aspect-[7/4] text-center font-semibold p-4 rounded-full ">
+                {orders?.orders.length || 0}
+              </span>{" "}
+              <span>Orders</span>
+            </div>
+            <div className="text-2xl aspect-square font-bold  bg-white shadow-lg   text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
+              <BsCurrencyDollar className="text-2xl" />
+              <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
+                {revenue?.revenue || 0}
+              </span>{" "}
+              <span>Revenue</span>
+            </div>
+            <div className="text-2xl aspect-square font-bold bg-white shadow-lg   text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
+              <FaProductHunt className="text-2xl" />
+              <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
+                {revenue?.revenue || 0}
+              </span>{" "}
+              <span>Products</span>
+            </div>
+            <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
+              <BiCategory className="text-2xl" />
+              <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
+                {revenue?.revenue || 0}
+              </span>{" "}
+              <span>Categories</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {/* Store and Profile */}
-      { !store && 
-      <div className="flex flex-col  justify-center items-center gap-8 m-5">
-        <h1 className="text-4xl  text-[#3ba33b] font-semibold">
-          Your Store
-        </h1>
-        <div className="flex justify-center items-center gap-8 flex-wrap m-5">
-          <Button
-            onClick={onOpen}
-            variant={"solid"}
-            className="flex justify-center items-center gap-2"
-            colorScheme={"green"}
-          >
-            <AiOutlinePlusCircle className="text-xl font-semibold" />
-            <span>Create Store</span>
-          </Button>
+      {!store.store_id && (
+        <div className="flex flex-col shadow-lg p-5 justify-center items-center gap-8 m-5 bg-white rounded-full">
+          <h1 className="text-4xl  text-[#3ba33b] font-semibold">Your Store</h1>
+          <p>You don't have a Store Yet Create One </p>
+          <div className="flex  justify-center items-center gap-8 flex-wrap m-5">
+            <Button
+              onClick={onOpen}
+              variant={"solid"}
+              className="flex justify-center items-center gap-2"
+              colorScheme={"green"}
+            >
+              <AiOutlinePlusCircle className="text-xl font-semibold" />
+              <span>Create Store</span>
+            </Button>
+          </div>
+          <StoreCheckoutForm
+            isOpen={isOpen}
+            onClose={onClose}
+            onOpen={onOpen}
+          />
         </div>
-        <StoreCheckoutForm isOpen={isOpen} onClose={onClose} onOpen={onOpen}/> 
-      </div>
-      }
-      {
-        store && <div className=" justify-center items-center flex flex-col gap-8 m-5">
-        <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
-          Your Orders
-        </h1>
-        <TrackOrder/>
+      )}
+      {store.store_id && (
+        <div className=" justify-center items-center flex flex-col gap-8 m-5 ">
+          <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
+            Your Orders
+          </h1>
+          <TrackOrder />
         </div>
-      }
+      )}
     </>
   );
 };
 
 export default StoreAdmin;
 
-export const StoreCheckoutForm = ({isOpen, onOpen, onClose}) => {
-
-  const  {
-    register  : register,
-    handleSubmit : handleSubmit,
+export const StoreCheckoutForm = ({ isOpen, onOpen, onClose }) => {
+  const {
+    register: register,
+    handleSubmit: handleSubmit,
     reset: reset,
-    formState: { errors : errors },
-  } = useForm()
+    formState: { errors: errors },
+  } = useForm();
+  // User Data
+  const user = useSelector(state => state.user.data)
+  const dispatch = useDispatch();
+  const [createStore] = useCreateStoreMutation()
+  const onSubmit = async (data) => {
+   try
+   {
+      const storeData = {
+        customerData : user,
+        b_card : data.b_card,
+        b_cardNo : data.b_cardNo,
+        store_name : data.s_name
+      }
+      const payload = await createStore(storeData).unwrap();
+      dispatch(setStore(payload))
+      reset()
+   }
+   catch(e)
+   {
+    console.log(e.message)
 
-  const onSubmit = ()=>{
-    console.log("SUBMITTED")
-  }
+   }
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />

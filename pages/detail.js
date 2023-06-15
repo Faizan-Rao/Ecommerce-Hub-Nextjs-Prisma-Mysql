@@ -1,5 +1,8 @@
 import { addToCart } from "@/services/LocalSlices/CartLocalSlice";
-import { useGetProductDetailQuery, useUserFeedbackMutation } from "@/services/userApiSlice";
+import {
+  useGetProductDetailQuery,
+  useUserFeedbackMutation,
+} from "@/services/userApiSlice";
 import { Button } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -23,56 +26,58 @@ const Detail = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const user = useSelector((state) => state.user.data);
   const { data, isLoading, isUninitialized } = useGetProductDetailQuery(prodId);
-  console.log(data)
+  console.log(data);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [Feedback, setFeedback] = useState(0);
   const [userFeedBack] = useUserFeedbackMutation();
-  const toast = useToast()
+  const toast = useToast();
 
-  const onSubmitFeedBack = async ()=>{
+  const onSubmitFeedBack = async () => {
     const feedbackBody = {
       customer_id: user.customer_id,
       product_id: data?.data[0]?.product_id,
-      feedback_rating:Feedback
-    }
-    try{
-      const payload = await userFeedBack(feedbackBody).unwrap()
+      feedback_rating: Feedback,
+    };
+    try {
+      const payload = await userFeedBack(feedbackBody).unwrap();
       console.log(payload);
       toast({
         title: `Thanks for Your Feedback`,
         status: "success",
         isClosable: true,
-        position: 'top',
+        position: "top",
         duration: 4000,
-      })
-    }
-    catch(err)
-    {
-      console.log("Error")
+      });
+    } catch (err) {
+      console.log("Error");
       toast({
         title: `You have already given the Feedback`,
         status: "info",
         isClosable: true,
-        position: 'top',
+        position: "top",
         duration: 4000,
-      })
+      });
     }
-  }
+  };
   return (
     <div>
       {isLoading ? (
         <p>Loading</p>
-      ):isUninitialized ? <p>UnIntialized</p> : (
+      ) : isUninitialized ? (
+        <p>UnIntialized</p>
+      ) : (
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="container px-5 py-24 mx-auto">
             <div className="lg:w-4/5 mx-auto flex flex-wrap">
               {/* Product Image */}
               <Image
                 alt="ecommerce"
-                className="lg:w-1/2 w-full lg:h-auto overfolow-hidden h-64 aspect-square object-cover object-center rounded-lg"
-                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                width={200}
-                height={200}
+                className=" lg:w-1/2 w-full lg:h-auto overfolow-hidden h-24  object-cover object-center rounded-lg"
+                src={
+                  "/images/" + data?.data[0]?.product_image }
+                width={300}
+                height={150}
+                
               />
               {/* Product Brand and Name */}
               <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -83,7 +88,10 @@ const Detail = () => {
                   {data?.data[0]?.product_title || "0"}
                 </h1>
                 {/* Product Reviews */}
-                <div>({ parseInt(data?.data[0]?.avg_rating) || "0"}) Total-Review <BsStarFill className="text-yellow-500 inline-block" /></div>
+                <div>
+                  ({parseInt(data?.data[0]?.avg_rating) || "0"}) Total-Review{" "}
+                  <BsStarFill className="text-yellow-500 inline-block" />
+                </div>
                 <p className="leading-relaxed my-6">
                   {data?.data[0]?.product_desc} <br />
                 </p>
@@ -121,11 +129,20 @@ const Detail = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader className="flex items-center gap-3"> Feedback <BsStarFill className="text-yellow-500 inline-block" /></ModalHeader>
+          <ModalHeader className="flex items-center gap-3">
+            {" "}
+            Feedback <BsStarFill className="text-yellow-500 inline-block" />
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody className="flex items-center gap-5 flex-col">
             <p>Please Give Feedback About the Product</p>
-            <select name="feedBack" onChange={(e)=> setFeedback(e.target.value)} placeholder="Give Feedback" className="p-5 outline-none font-semibold" id="feedback">
+            <select
+              name="feedBack"
+              onChange={(e) => setFeedback(e.target.value)}
+              placeholder="Give Feedback"
+              className="p-5 outline-none font-semibold"
+              id="feedback"
+            >
               <option>-- Select an Option </option>
               <option value={1}>Worst </option>
               <option value={2}>Normal</option>
@@ -136,7 +153,12 @@ const Detail = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button onClick={onSubmitFeedBack} colorScheme="green" mr={3} onClickCapture={onClose}>
+            <Button
+              onClick={onSubmitFeedBack}
+              colorScheme="green"
+              mr={3}
+              onClickCapture={onClose}
+            >
               Feedback
             </Button>
           </ModalFooter>

@@ -1,4 +1,7 @@
-import { useSgetDispatchOrderQuery } from "@/services/sadminApiSlice";
+import {
+  useSgetDispatchOrderQuery,
+  useSgetRevenueQuery,
+} from "@/services/sadminApiSlice";
 import React from "react";
 import {
   Table,
@@ -12,9 +15,12 @@ import {
   TableContainer,
   Button,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 const Sorders = () => {
-  const { data, isLoading } = useSgetDispatchOrderQuery();
+  const store_id = useSelector((state) => state.user.store.store_id);
+  const { data, isLoading } = useSgetDispatchOrderQuery(store_id);
+  const { data: revenue } = useSgetRevenueQuery({ store_id });
   return (
     <>
       <div className="flex flex-col  justify-center  gap-8 m-5">
@@ -22,65 +28,88 @@ const Sorders = () => {
           Dispatched List
         </h1>
         <div className="flex justify-center gap-1 flex-wrap  ">
-      
-        <TableContainer>
-          <Table size="sm">
-            <Thead className="bg-gray-200">
-                    <Tr>
-                      <Th>Order#</Th>
-                      <Th>Order-Title</Th>
-                      <Th>Order-Quantity</Th>
-                      <Th>Order-Status</Th>
-                      <Th>Order-Date</Th>
-                      <Th>Total-Price</Th>
-                      <Th>Bill-ID</Th>
-                      <Th>
-                      <Button
-                        variant={'solid'} colorScheme="blackAlpha" size={'sm'}
-                          className=" bg-gray-400 hover:bg-gray-600  text-white py-2 px-2  ml-3 rounded  font-semibold text-[16px]"
-                         
-                          onClickCapture={() => onDispatchOrder(e.purchase_id)}
-                        >
-                          {" "}
-                          Clear ALL
-                        </Button>
-                      </Th>
-                    </Tr>
-                  </Thead>
-            <Tbody bgColor={'white'}>
-           {!isLoading && data.map((e, i) => {
-              return (  <Tr key={i + 1}>
-                      {/* Items# */}
-                      <Td>{i + 1}</Td>
-                      {/* Order Title */}
-                      <Td className="text-gray-500 text-lg font-semibold">
-                        {e.purchase_title}
-                      </Td>
-                      {/* Order Quantity  */}
-                      <Td className=" font-semibold" isNumeric>
-                        {e.purchase_quantity}
-                      </Td>
-                      {/* Order Status*/}
-                      <Td>{e.purchase_status}</Td>
-                      {/* Order Date */}
-                      <Td>{e.purchase_date.toString().split("T")[0]}</Td>
-                      {/* Total Price */}
-                      <Td isNumeric>
-                        <span className="text-gray-500">
-                          ${e.purchase_amount}
-                        </span>
-                      </Td>
-                      <Td isNumeric>{e.bill_id}</Td>
-                      {/* Dispatch Button */}
-                      <Td></Td>
-                    </Tr> )})}
-             
-            </Tbody>
-            
-          </Table>
-        </TableContainer>
-        
+          <TableContainer>
+            <Table size="sm">
+              <Thead className="bg-gray-200">
+                <Tr>
+                  <Th>Order#</Th>
+                  <Th>Order-Title</Th>
+                  <Th>Order-Quantity</Th>
+                  <Th>Order-Status</Th>
+                  <Th>Order-Date</Th>
+                  <Th>Total-Price</Th>
+                  <Th colSpan={3}>Bill-ID</Th>
+                  
+                  
+                </Tr>
+              </Thead>
+              <Tbody bgColor={"white"}>
+                {!isLoading &&
+                  data.map((e, i) => {
+                    return (
+                      <Tr key={i + 1}>
+                        {/* Items# */}
+                        <Td>{i + 1}</Td>
+                        {/* Order Title */}
+                        <Td className="text-gray-500 text-lg font-semibold">
+                          {e.purchase_title}
+                        </Td>
+                        {/* Order Quantity  */}
+                        <Td className=" font-semibold" isNumeric>
+                          {e.purchase_quantity}
+                        </Td>
+                        {/* Order Status*/}
+                        <Td>{e.purchase_status}</Td>
+                        {/* Order Date */}
+                        <Td>{e.purchase_date.toString().split("T")[0]}</Td>
+                        {/* Total Price */}
+                        <Td isNumeric>
+                          <span className="text-gray-500">
+                            ${e.purchase_amount}
+                          </span>
+                        </Td>
+                        <Td isNumeric>{e.bill_id}</Td>
+                        {/* Dispatch Button */}
+                        <Td></Td>
+                        <Td></Td>
+                      </Tr>
+                    );
+                  })}
+              </Tbody>
+              <Tfoot bgColor={"white"} textAlign={"center"}>
+                <Th fontSize={"xl"} h={"1.5"}>
+                  Total Revenue
+                </Th>
+                <Th fontSize={"xl"}> = ${revenue?.revenue}</Th>
+                <Th>
+                    <Button
+                      variant={"solid"}
+                      colorScheme="blackAlpha"
+                      size={"sm"}
+                      className=" bg-gray-400 hover:bg-gray-600  text-white py-2 px-2  ml-3 rounded  font-semibold text-[16px]"
+                      onClickCapture={() => window.print()}
+                    >
+                      {" "}
+                      Generate Report
+                    </Button>
+                  </Th>
+                  <Th colSpan={6}>
+                    <Button
+                      variant={"solid"}
+                      colorScheme="blackAlpha"
+                      size={"sm"}
+                      className=" bg-gray-400 hover:bg-gray-600  text-white py-2 px-2  ml-3 rounded  font-semibold text-[16px]"
+                      
+                    >
+                      {" "}
+                      Clear ALL
+                    </Button>
+                  </Th>
+              </Tfoot>
+            </Table>
+          </TableContainer>
         </div>
+      
       </div>
     </>
   );

@@ -15,13 +15,14 @@ import {FaStore, FaProductHunt} from 'react-icons/fa'
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import { removeUser } from "@/services/LocalSlices/UserLocalSlice";
 
 const SideBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const store = useSelector(state => state.user.store)
   return (
-    <div>
+    store.store_id && <div>
       {/* Cart Button */}
       <button
         onClick={onOpen}
@@ -66,28 +67,20 @@ const SideBar = () => {
                   <span>Orders</span>
                 </Link>
               </li>
+              
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
                 <Link href={"s-category"} onClick={onClose} className="flex justify-between items-center gap-8">
-                  <BiCategory className="text-2xl" />{" "}
-                  <span>Categories</span>
-                </Link>
-              </li>
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"s-subcategory"} onClick={onClose} className="flex justify-between items-center gap-8">
-                  <BiCategory className="text-2xl" />{" "}
-                  <span>SubCategory</span>{" "}
-                </Link>
-              </li>
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"s-product"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <FaProductHunt className="text-xl" />{" "}
-                  <span>Products</span>
+                  <span>Products List</span>
                 </Link>
               </li>
             </ul>
           </DrawerBody>
           <DrawerFooter>
-            <Button colorScheme="green">Logout</Button>
+            <Button colorScheme="green" onClick={()=>{
+              dispatch(removeUser())
+              window.location.replace('/')
+              }}>Logout</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
