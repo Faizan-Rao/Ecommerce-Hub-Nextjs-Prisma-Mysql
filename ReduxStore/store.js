@@ -15,12 +15,13 @@ import storage from "reduxjs-toolkit-persist/lib/storage";
 import autoMergeLevel1 from "reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel1";
 import { userSlice } from "@/services/LocalSlices/UserLocalSlice";
 import { sadminApi } from "@/services/sadminApiSlice";
+import { adminSlice } from "@/services/LocalSlices/AdminLocalSlice";
 
 const persistConfig = {
   key: "root",
   storage: storage,
   stateReconciler: autoMergeLevel1,
-  whitelist: ["cart", "user"],
+  whitelist: ["cart", "user", "admin"],
 };
 
 const rootReducer = combineReducers({
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   [sadminApi.reducerPath]: sadminApi.reducer,
   cart: cartReducer,
   user: userSlice.reducer,
+  admin: adminSlice.reducer,
 });
 
 const _persistedReducer = persistReducer(persistConfig, rootReducer);

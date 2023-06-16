@@ -18,13 +18,13 @@ import Link from "next/link";
 import { removeUser } from "@/services/LocalSlices/UserLocalSlice";
 import { useRouter } from "next/router";
 
-const SideBar = () => {
+const AdminBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
-  const store = useSelector(state => state.user.store)
-  const router = useRouter()
+ const isLoggedIn = useSelector(state => state.admin.isLoggedIn)
+ const router = useRouter()
   return (
-    store.store_id && <div>
+    isLoggedIn && <div>
       {/* Cart Button */}
       <button
         onClick={onOpen}
@@ -39,41 +39,35 @@ const SideBar = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton color={"green.700"} mt={2} />
-          <DrawerHeader fontSize={"xl"}>STORE-PANEL</DrawerHeader>
+          <DrawerHeader fontSize={"xl"}>ADMIN-PANEL</DrawerHeader>
 
           <DrawerBody overflow={"auto"}>
             {/* Drawer Links */}
             <ul className="flex justify-center  flex-col min-h-[600px] gap-9">
-             { !store ? <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+             <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
                 <Link href={"main"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <FaStore className="text-2xl" />{" "}
-                  <span>Store</span>
-                </Link>
-              </li>
-              :
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"main"}  onClick={onClose} className="flex justify-between items-center gap-8">
-                  <FaStore className="text-2xl" />{" "}
-                  <span>{store.store_name}</span>
-                </Link>
-              </li>}
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"s-profile"} onClick={onClose} className="flex justify-between items-center gap-8">
-                  <BsFillPersonFill className="text-2xl" />{" "}
-                  <span>Edit Profile & Store</span>{" "}
-                </Link>
-              </li>
-              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"s-orders"} onClick={onClose} className="flex justify-between items-center gap-8">
-                  <BsFillBasketFill className="text-2xl" />{" "}
-                  <span>Orders</span>
+                  <span>Main</span>
                 </Link>
               </li>
               
               <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
-                <Link href={"s-category"} onClick={onClose} className="flex justify-between items-center gap-8">
+                <Link href={"a-profile"} onClick={onClose} className="flex justify-between items-center gap-8">
+                  <BsFillPersonFill className="text-2xl" />{" "}
+                  <span>Edit Profile </span>{" "}
+                </Link>
+              </li>
+              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+                <Link href={"a-customer"} onClick={onClose} className="flex justify-between items-center gap-8">
+                  <BsFillBasketFill className="text-2xl" />{" "}
+                  <span>Customers</span>
+                </Link>
+              </li>
+              
+              <li className="flex mx-auto gap-4 items-center text-gray-500 w-[50%] hover:text-green-600  py-2  px-6 font-semibold text-lg  mr-auto">
+                <Link href={"a-stores"} onClick={onClose} className="flex justify-between items-center gap-8">
                   <FaProductHunt className="text-xl" />{" "}
-                  <span>Products List</span>
+                  <span>Stores & Admins </span>
                 </Link>
               </li>
             </ul>
@@ -90,4 +84,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default AdminBar;

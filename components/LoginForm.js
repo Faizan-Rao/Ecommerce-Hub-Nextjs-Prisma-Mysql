@@ -5,6 +5,9 @@ import { useToast } from '@chakra-ui/react'
 import { useDispatch } from "react-redux";
 import { setStore, setUser } from "@/services/LocalSlices/UserLocalSlice";
 import { useGetStoreMutation } from "@/services/sadminApiSlice";
+import { useGetAdminMutation } from "@/services/adminApiSlice";
+import { setAdmin } from "@/services/LocalSlices/AdminLocalSlice";
+import { useRouter } from "next/router";
 
 const LoginForm = ({
   email,
@@ -20,7 +23,8 @@ const LoginForm = ({
   const [UserLogin] = useUserLoginMutation();
   const [GetStore] = useGetStoreMutation();
   const toast = useToast()
-
+  const [AdminLogin] = useGetAdminMutation();
+  const router = useRouter()
   const onUserLoginCall = async (data) => {
     try
     {
@@ -37,6 +41,37 @@ const LoginForm = ({
       const store = await GetStore({customer_login }).unwrap()
       dispatch(setStore(store))
       dispatch(setUser(response.data))
+      reset()
+      router.replace('/')
+    }
+    catch(e)
+    {
+      toast({
+        title: `Invalid Credentials`,
+        status: 'error',
+        isClosable: true,
+        position: 'top',
+        duration: 4000,
+      })
+      
+    }
+  };
+
+  const onAdminLoginCall = async (data) => {
+    try
+    {
+      
+      const response = await AdminLogin(data).unwrap()
+      toast({
+        title: `You Have Been Logged in Sucessfully`,
+        status: 'success',
+        isClosable: true,
+        position: 'top',
+        duration: 4000,
+      })
+  
+      dispatch(setAdmin(response))
+      router.replace('main')
       reset()
     }
     catch(e)
@@ -61,7 +96,7 @@ const LoginForm = ({
         console.log("storeAdmin");
         break;
       case "admin":
-        console.log("admin");
+        onAdminLoginCall(data)
         break;
     }
   };
