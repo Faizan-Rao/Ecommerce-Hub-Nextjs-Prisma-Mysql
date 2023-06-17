@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { useGetRecommendedQuery } from "@/services/userApiSlice";
 import ProductCard from "@/components/User/ProductCard";
 import Link from "next/link";
-
+import { motion } from "framer-motion";
 const inter = Inter({ subsets: ["latin"] });
 // Home Entry Point User
 export default function Home() {
@@ -11,10 +11,16 @@ export default function Home() {
   return (
     <>
       {/* Popular Products */}
-      <div className="m-5 ">
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{duration:0.5}}
+        className="m-5 flex justify-center items-center flex-col"
+      >
         <h1 className="text-3xl p-5">Product Recommendation</h1>
         <div
-          className={"flex items-center justify-around flex-wrap gap-4 my-4 "}
+          className={"flex items-center justify-center flex-wrap gap-8 my-4 "}
         >
           {isLoading ? (
             <p>Loading</p>
@@ -24,9 +30,15 @@ export default function Home() {
             })
           )}
         </div>
-      </div>
+      </motion.div>
       {/* Call To Action */}
-      <div className="m-5 bg-[#F3F4F6] rounded-lg p-4">
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{duration:0.5}}
+        className="m-5 flex justify-center items-center flex-col  bg-[#F3F4F6] rounded-full  p-8"
+      >
         <h1 className="text-3xl p-5">Call To Action</h1>
         <div className="flex justify-center items-center flex-col gap-8 p-4">
           <p>For More Information Click the Buttons Below</p>
@@ -60,13 +72,19 @@ export default function Home() {
             </li>
           </ul>
         </div>
-      </div>
+      </motion.div>
       {/* Our Partner */}
-      <div className="m-5 ">
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{duration:0.5}}
+        className="m-5 flex justify-center items-center flex-col "
+      >
         <h1 className="text-3xl p-5">Our Partner</h1>
         <div className="flex justify-center items-center flex-col  gap-8 aspect-[8/2] p-8">
           <ul className="flex justify-center items-center  gap-8 flex-wrap">
-            <li className="flex gap-3 items-center  overflow-hidden rounded-full shadow-lg">
+            <li className="flex gap-3 items-center  aspect-square p-4 bg-white overflow-hidden rounded-full shadow-lg">
               {" "}
               <Image
                 src={"/brandLogo/apple.png"}
@@ -76,7 +94,7 @@ export default function Home() {
                 alt="Apple"
               />
             </li>
-            <li className="flex gap-3 items-center overflow-hidden rounded-full shadow-lg">
+            <li className="flex gap-3 items-center aspect-square p-4 bg-white bg-blend-darken overflow-hidden rounded-full shadow-lg">
               {" "}
               <Image
                 src={"/brandLogo/samsung.png"}
@@ -86,7 +104,7 @@ export default function Home() {
                 alt="Samsung"
               />
             </li>
-            <li className="flex gap-3 items-center overflow-hidden rounded-full shadow-lg">
+            <li className="flex gap-3 items-center aspect-square p-4 bg-white bg-blend-darken overflow-hidden rounded-full shadow-lg">
               {" "}
               <Image
                 src={"/brandLogo/sony.png"}
@@ -98,7 +116,7 @@ export default function Home() {
             </li>
           </ul>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

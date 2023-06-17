@@ -1,26 +1,32 @@
-const {PrismaClient} =  require("@prisma/client")
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const main = async () =>{
-    const PR_response = await prisma.billing.findMany({
-        where:{
-          customer_id: 1
-        },
-        include:{
-          purchase_record:{
-            where:{
-              purchase_id: 60,
-            }
+const main = async () => {
+  const stores = await prisma.stores.findMany()
+        const customers = await prisma.customers.findMany();
+        const admins = await prisma.admins.findMany();
+        const purchaseRecord = await prisma.purchase_record.findMany()
+        const revenue = purchaseRecord.reduce((totalRevenue, item)=>{
+            if(item.purchase_status === "dispatched" && item.purchase_type === 'product')
+                totalRevenue.revenue += (item.purchase_amount * 0.3)
+            if(item.purchase_type === 'store')
+                totalRevenue.revenue += item.purchase_amount 
+            return totalRevenue
+        },{revenue : 0})
 
-          }
+        const payload = {
+            totalStore : stores.length,
+            totalCustomers: customers.length,
+            totalAdmins: admins.length,
+            totalRevenue: revenue.revenue
         }
-      })
-      console.dir(PR_response,{depth: null})
-}
+        console.log(payload)
+};
 
 main()
-.catch(err=>{
-    console.log(err.message)
-}).finally(async ()=>{
-    await prisma.$disconnect()
-})
+  .catch((err) => {
+    console.log(err.message);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

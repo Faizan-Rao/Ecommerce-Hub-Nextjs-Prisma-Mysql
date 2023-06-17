@@ -2,14 +2,19 @@ import ProductCard from '@/components/User/ProductCard';
 import { useGetProductQuery } from '@/services/userApiSlice';
 import { useRouter } from 'next/router';
 import React from 'react'
+import {motion} from 'framer-motion'
 const ProductList = () => {
     const subCatId = useRouter().query.subCatId
     const{data,isLoading} = useGetProductQuery(subCatId)
   return (
-    <div className="m-5 ">
-        <h1 className="text-3xl p-5">All Products</h1>
+    <motion.div
+    initial={{ scale: 0 }}
+    whileInView={{ scale: 1 }}
+    viewport={{ once: true }}
+    transition={{duration:0.5}} className="m-5 flex items-center justify-center flex-col">
+        <h1 className="text-3xl p-5">Product List</h1>
         <div
-          className={"flex items-center justify-around flex-wrap gap-4 my-4 "}
+          className={"flex items-center  flex-wrap gap-4 my-4 "}
         >
           {isLoading ? (
             <p>Loading</p>
@@ -19,7 +24,7 @@ const ProductList = () => {
             })
           )}
         </div>
-      </div>
+      </motion.div>
   )
 }
 

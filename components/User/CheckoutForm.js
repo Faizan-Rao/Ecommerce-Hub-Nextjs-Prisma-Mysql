@@ -28,7 +28,12 @@ const CheckoutForm = ({
   const cart = useSelector((state) => state.cart.value);
   const toast = useToast();
   const user = useSelector((state) => state.user.data);
+<<<<<<< HEAD
   const dispatch = useDispatch();
+=======
+  const dispatch  = useDispatch();
+
+>>>>>>> feature
   // Checkout Product Procedure
   const CheckoutProduct = async (data) => {
     // calculate total Price for Each record
@@ -36,6 +41,7 @@ const CheckoutForm = ({
       (e) => {
         if (e.product_qty >= 0) {
           return {
+            store_id : e.store_id,
             purchase_amount: e.product_qty * e.product_price,
             purchase_quantity: e.product_qty,
             purchase_title: e.product_title,
@@ -46,6 +52,7 @@ const CheckoutForm = ({
           };
         }
         return {
+          store_id : e.store_id,
           purchase_amount:  e.product_price,
           purchase_quantity: e.product_qty,
           purchase_title: e.product_title,
@@ -135,6 +142,7 @@ const CheckoutForm = ({
                 type="submit"
                 className="mr-3 py-1 px-3 bg-gray-200 rounded cursor-pointer hover:text-[#3ba33b]"
                 value={"Checkout"}
+                onClick={onClose}
               />
             </div>
           </form>

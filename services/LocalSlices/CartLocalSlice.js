@@ -20,6 +20,7 @@ export const cartSlice = createSlice({
         state.value.push(action.payload);
       }
     },
+<<<<<<< HEAD
     removeToCart: (state, action) => {
       state.value = state.value.filter(
         (item) => item.product_id !== action.payload
@@ -59,6 +60,46 @@ export const cartSlice = createSlice({
           totalQuantity: 0,
         }
       );
+=======
+    removeToCart : (state, action) => {
+       state.value = state.value.filter(item => item.product_id !== action.payload) 
+      },
+      removeOne: (state, action) =>{
+        state.value = state.value.map(item=>{
+          
+          if(item.product_id === action.payload)
+          { 
+            if(item.product_qty <= 0)
+              return item
+            return {...item , product_qty: item.product_qty - 1}
+          }
+          return item;
+        })
+      },
+      addOne: (state, action) =>{
+       state.value = state.value.map(item=>{
+          if(item.product_id === action.payload)
+          {
+            return {...item , product_qty: item.product_qty + 1}
+          }
+          return item;
+        })
+      },
+      emptyCart :(state)=>{
+        state.value = []
+      },
+    getCartTotal: (state) =>{
+      const {totalPrice , totalQuantity} = state.value.reduce((cartTotal, cartItem)=>{
+        const {product_qty, product_price} = cartItem;
+        const price = product_qty * product_price;
+        cartTotal.totalPrice += price;
+        cartTotal.totalQuantity += product_qty;
+        return cartTotal; 
+      },{
+        totalPrice:0,
+        totalQuantity:0,
+      })
+>>>>>>> feature
       state.totalPrice = parseInt(totalPrice.toFixed(2));
       state.totalQuantity = totalQuantity;
     },
@@ -66,7 +107,11 @@ export const cartSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
+<<<<<<< HEAD
 export const {emptyCart, addToCart, removeToCart, getCartTotal, addOne, removeOne } =
   cartSlice.actions;
+=======
+export const { emptyCart,addToCart, removeToCart, getCartTotal, addOne, removeOne} = cartSlice.actions
+>>>>>>> feature
 
 export default cartSlice.reducer;

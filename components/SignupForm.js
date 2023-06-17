@@ -62,10 +62,10 @@ const SignUpForm = ({
         onUserSignUpCall(data)
         break;
       case "storeAdmin":
-        console.log("storeAdmin");
+        
         break;
       case "admin":
-        console.log("admin");
+     
         break;
     }
   };

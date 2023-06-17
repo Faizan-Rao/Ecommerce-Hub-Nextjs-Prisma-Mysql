@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import SignUpForm from "@/components/SignupForm";
-
+import {motion} from "framer-motion"
 const Login = () => {
   const MultiForm = () => {
     const form1 = useForm();
@@ -33,7 +33,11 @@ const Login = () => {
       </TabList>
       <TabPanels>
         <TabPanel>
-          <div className="flex justify-center items-center">
+          <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+       viewport={{once: true}}
+        transition={{duration:0.5}} className="flex justify-center items-center">
             <LoginForm
               email={"userEmail"}
               role={"user"}
@@ -43,10 +47,14 @@ const Login = () => {
               errors={errors1}
               reset={reset1}
             />
-          </div>
+          </motion.div>
         </TabPanel>
         <TabPanel>
-          <div className="flex justify-center items-center">
+          <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{duration:0.5}} className="flex justify-center items-center">
             <SignUpForm
               name={"userName"}
               email={"userEmail"}
@@ -57,7 +65,7 @@ const Login = () => {
               errors={errors2}
               reset={reset2}
             />
-          </div>
+          </motion.div>
         </TabPanel>
       </TabPanels>
     </Tabs>

@@ -6,7 +6,7 @@ export const userApi = createApi({
   
 
   baseQuery: fetchBaseQuery({ baseUrl: "/api/User" }),
-  
+  tagTypes:['prod_Tran'],
   endpoints: (builder) => ({
     getRecommended: builder.query({
       query: () => `/User_getPopularProduct`,
@@ -29,6 +29,12 @@ export const userApi = createApi({
     getProductDetail: builder.query({
       query: (prodId) => `/User_ProductDetail?prodId=${prodId}`,
     }),
+    getOrders: builder.query({
+      query: (customer_id) =>
+        `/User_Orders?customer_id=${customer_id}`,
+      providesTags: ['prod_Tran'],
+    }),
+    
     dynamicSearch: builder.query({
       query: ({ search, minPrice, maxPrice }) =>
         `/User_DynamicSearch?search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
@@ -55,12 +61,22 @@ export const userApi = createApi({
         body,
       }),
     }),
+    
     UserProductTran: builder.mutation({
       query: (body) => ({
         url: `/User_ProductTransaction`,
         method: "POST",
         body,
       }),
+      invalidatesTags:['prod_Tran']
+    }),
+    removeOrder: builder.mutation({
+      query: (body) => ({
+        url: `/User_Orders`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags:['prod_Tran']
     }),
     
   }),
@@ -81,4 +97,6 @@ export const {
   useUserSignupMutation,
   useUserFeedbackMutation,
   useUserProductTranMutation,
+  useGetOrdersQuery,
+  useRemoveOrderMutation,
 } = userApi;
