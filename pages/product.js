@@ -5,6 +5,7 @@ import {
 } from "@/services/userApiSlice";
 import React, { useDeferredValue, useState } from "react";
 import { Button } from "@chakra-ui/react";
+import {motion} from "framer-motion"
 const Products = () => {
   const { data: AllProduct, isLoading: isLoadingAll } = useGetAllProductQuery();
   const [search, setSearch] = useState({

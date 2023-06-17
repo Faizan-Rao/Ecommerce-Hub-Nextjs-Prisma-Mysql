@@ -28,12 +28,8 @@ const CheckoutForm = ({
   const cart = useSelector((state) => state.cart.value);
   const toast = useToast();
   const user = useSelector((state) => state.user.data);
-<<<<<<< HEAD
-  const dispatch = useDispatch();
-=======
   const dispatch  = useDispatch();
 
->>>>>>> feature
   // Checkout Product Procedure
   const CheckoutProduct = async (data) => {
     // calculate total Price for Each record

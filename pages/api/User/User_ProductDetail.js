@@ -16,20 +16,12 @@ export default async function handler(req, res) {
       values = [prodId];
       let ratings = await ExecuteQuery({ query, values });
 
-<<<<<<< HEAD
-      
-=======
      
->>>>>>> feature
 
       if (ratings.length > 0 && result.length > 0) {
         result = { ...result[0], ["avg_rating"]: ratings[0].avg_rating };
       }
-<<<<<<< HEAD
-     
-=======
       
->>>>>>> feature
 
       if (result.length !== 0) {
         return res.json({
