@@ -20,6 +20,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { BsStarFill } from "react-icons/bs";
+import {motion} from "framer-motion"
 const Detail = () => {
   const prodId = useRouter().query.prodId;
   const dispatch = useDispatch();
@@ -60,7 +61,11 @@ const Detail = () => {
     }
   };
   return (
-    <div>
+    <motion.div
+    initial={{ scale: 0 }}
+    whileInView={{ scale: 1 }}
+    viewport={{ once: true }}
+    transition={{duration:0.5}}>
       {isLoading ? (
         <p>Loading</p>
       ) : isUninitialized ? (
@@ -164,7 +169,7 @@ const Detail = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </div>
+    </motion.div>
   );
 };
 

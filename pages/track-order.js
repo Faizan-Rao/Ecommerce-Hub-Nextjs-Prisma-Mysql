@@ -31,7 +31,7 @@ import {
   useGetOrdersQuery,
   useRemoveOrderMutation,
 } from "@/services/userApiSlice";
-
+import {motion} from "framer-motion"
 const TrackOrder = () => {
   // states and Hooks
   const customer_id = useSelector((state) => state.user.data.customer_id);
@@ -43,7 +43,11 @@ const TrackOrder = () => {
     const toast = useToast()
   return (
     <>
-      <div className="m-5 overflow-auto flex flex-col justify-center items-center">
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{duration:0.5}} className="m-5 overflow-auto flex flex-col justify-center items-center">
         <h1 className="text-3xl p-5">Track Orders</h1>
         {/* Table For Order Items */}
         <TableContainer>
@@ -75,7 +79,7 @@ const TrackOrder = () => {
               );
             })}
         </TableContainer>
-      </div>
+      </motion.div>
      <OrderRemovalForm onClose={onClose} onOpen={onOpen} isOpen={isOpen} orderID={OrderID} removeOrder={removeOrder} toast = {toast}/>
     </>
   );

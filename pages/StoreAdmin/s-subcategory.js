@@ -35,7 +35,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-
+import {motion} from "framer-motion"
 const Ssubcategory = () => {
   const id = useRouter().query.c_id;
   const { data, isLoading } = useSgetSubcategoryQuery(id);
@@ -172,7 +172,11 @@ const Ssubcategory = () => {
         <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
           Subcategory List
         </h1>
-        <div className="flex justify-center gap-1 flex-wrap  ">
+        <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }} className="flex justify-center gap-1 flex-wrap  ">
           {/* Subcategory Table */}
           <TableContainer>
             <Table size="sm">
@@ -342,7 +346,7 @@ const Ssubcategory = () => {
               </ModalFooter>
             </ModalContent>
           </Modal>
-        </div>
+        </motion.div>
       </div>
     </>
   );

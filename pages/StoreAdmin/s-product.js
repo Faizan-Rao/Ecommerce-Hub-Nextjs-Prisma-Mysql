@@ -37,7 +37,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Image from "next/image";
-
+import {motion} from "framer-motion"
 const Sproduct = () => {
   const id = useRouter().query.s_id;
   const { data, isLoading } = useSgetProductQuery(id);
@@ -94,7 +94,7 @@ const Sproduct = () => {
   const onUploadFile = async (e) => {
     const formData = new FormData();
     formData.append("image", file);
-    console.log(file);
+   
     try
     {
 
@@ -143,7 +143,7 @@ const Sproduct = () => {
       formState: { errors: errors2 },
     },
   ] = MultiForms();
-  console.log(errors1);
+  
 
   // Create Subcategory Function
   const onCreateProduct = async (data) => {
@@ -249,7 +249,11 @@ const Sproduct = () => {
         <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
           Product List
         </h1>
-        <div className="flex justify-center gap-1 flex-wrap  ">
+        <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }} className="flex justify-center gap-1 flex-wrap  ">
           {/* Subcategory Table */}
           <TableContainer>
             <Table size="sm">
@@ -586,7 +590,7 @@ const Sproduct = () => {
               </ModalFooter>
             </ModalContent>
           </Modal>
-        </div>
+        </motion.div>
       </div>
     </>
   );

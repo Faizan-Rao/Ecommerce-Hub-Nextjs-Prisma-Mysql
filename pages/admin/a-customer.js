@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useGetCustomersQuery} from "@/services/adminApiSlice";
-
+import {motion} from "framer-motion"
 const Stores = () => {
   
   const { data, isLoading } = useGetCustomersQuery();
@@ -31,7 +31,11 @@ const Stores = () => {
         <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
           Customers
         </h1>
-        <div className="flex justify-center gap-1 flex-wrap  ">
+        <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }} className="flex justify-center gap-1 flex-wrap  ">
           <TableContainer>
             <Table size="sm">
               <Thead className="bg-gray-200" >
@@ -88,7 +92,7 @@ const Stores = () => {
          
           
          
-        </div>
+        </motion.div>
       </div>
     </>
   );

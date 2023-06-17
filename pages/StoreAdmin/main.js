@@ -25,26 +25,31 @@ import {
   useSgetRevenueQuery,
 } from "@/services/sadminApiSlice";
 import { setStore } from "@/services/LocalSlices/UserLocalSlice";
-
+import { motion } from "framer-motion";
 const StoreAdmin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const store_id = useSelector((state) => state.user.store.store_id);
   const { data: revenue } = useSgetRevenueQuery({ store_id });
   const { data: orders } = useSgetOrdersQuery({ store_id });
-  const {data: categories} = useSgetCategoryQuery(store_id)
-  
-  
+  const { data: categories } = useSgetCategoryQuery(store_id);
+
   const store = useSelector((state) => state.user.store);
- 
+
   return (
-    <>
+    <div>
       {store.store_id && (
-        <div className=" flex justify-center items-center flex-col  gap-5 m-5">
+        <div
+          className=" flex justify-center items-center flex-col  gap-5 m-5"
+        >
           <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
             Dashboard
           </h1>
           {/* Data ICONS */}
-          <div className="flex justify-center items-center  gap-8 flex-wrap my-5">
+          <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }} className="flex justify-center items-center  gap-8 flex-wrap my-5">
             <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
               <BsFillBasketFill className="text-2xl" />{" "}
               <span className="aspect-[7/4] text-center font-semibold p-4 rounded-full ">
@@ -59,7 +64,7 @@ const StoreAdmin = () => {
               </span>{" "}
               <span>Revenue</span>
             </div>
-            
+
             <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
               <BiCategory className="text-2xl" />
               <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
@@ -67,12 +72,18 @@ const StoreAdmin = () => {
               </span>{" "}
               <span>Categories</span>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
       {/* Store and Profile */}
       {!store.store_id && (
-        <div className="flex flex-col shadow-lg p-5 justify-center items-center gap-8 m-5 bg-white rounded-full">
+        <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col shadow-lg p-5 justify-center items-center gap-8 m-5 bg-white rounded-full"
+        >
           <h1 className="text-4xl  text-[#3ba33b] font-semibold">Your Store</h1>
           <p>You dont have a Store Yet Create One </p>
           <div className="flex  justify-center items-center gap-8 flex-wrap m-5">
@@ -91,17 +102,26 @@ const StoreAdmin = () => {
             onClose={onClose}
             onOpen={onOpen}
           />
-        </div>
+        </motion.div>
       )}
       {store.store_id && (
-        <div className=" justify-center items-center flex flex-col gap-8 m-5 ">
+        <div
+          className=" justify-center items-center flex flex-col gap-8 m-5 "
+        >
           <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
             Your Orders
           </h1>
+          <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}>
           <TrackOrder />
+
+          </motion.div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
@@ -115,27 +135,23 @@ export const StoreCheckoutForm = ({ isOpen, onOpen, onClose }) => {
     formState: { errors: errors },
   } = useForm();
   // User Data
-  const user = useSelector(state => state.user.data)
+  const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
-  const [createStore] = useCreateStoreMutation()
+  const [createStore] = useCreateStoreMutation();
   const onSubmit = async (data) => {
-   try
-   {
+    try {
       const storeData = {
-        customerData : user,
-        b_card : data.b_card,
-        b_cardNo : data.b_cardNo,
-        store_name : data.s_name
-      }
+        customerData: user,
+        b_card: data.b_card,
+        b_cardNo: data.b_cardNo,
+        store_name: data.s_name,
+      };
       const payload = await createStore(storeData).unwrap();
-      dispatch(setStore(payload))
-      reset()
-   }
-   catch(e)
-   {
-    console.log(e.message)
-
-   }
+      dispatch(setStore(payload));
+      reset();
+    } catch (e) {
+      console.log(e.message);
+    }
   };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

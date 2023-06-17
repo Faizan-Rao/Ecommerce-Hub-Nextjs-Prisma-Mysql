@@ -16,7 +16,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-
+import {motion} from "framer-motion"
 const Sorders = () => {
   const store_id = useSelector((state) => state.user.store.store_id);
   const { data, isLoading } = useSgetDispatchOrderQuery(store_id);
@@ -27,7 +27,11 @@ const Sorders = () => {
         <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
           Dispatched List
         </h1>
-        <div className="flex justify-center gap-1 flex-wrap  ">
+        <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }} className="flex justify-center gap-1 flex-wrap  ">
           <TableContainer>
             <Table size="sm">
               <Thead className="bg-gray-200">
@@ -108,7 +112,7 @@ const Sorders = () => {
               </Tfoot>
             </Table>
           </TableContainer>
-        </div>
+        </motion.div>
       
       </div>
     </>

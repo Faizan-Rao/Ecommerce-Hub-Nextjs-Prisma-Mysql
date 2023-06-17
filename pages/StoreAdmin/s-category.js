@@ -31,6 +31,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import {motion} from "framer-motion"
 const Scategory = () => {
   const id = useSelector((state) => state.user.store.store_id);
   const { data, isLoading } = useSgetCategoryQuery(id);
@@ -111,7 +112,7 @@ const Scategory = () => {
         category_title: data.category_title || "",
         category_id: C_ID,
       };
-     
+
       const payload = await updateCategory(Data).unwrap();
       toast({
         title: `Category Updation Sucessfull`,
@@ -159,11 +160,17 @@ const Scategory = () => {
   };
   return (
     <>
-      <div className="flex flex-col  justify-center  gap-8 m-5">
+      <div
+        className="flex flex-col  justify-center  gap-8 m-5"
+      >
         <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
           Category List
         </h1>
-        <div className="flex justify-center gap-1 flex-wrap  ">
+        <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }} className="flex justify-center gap-1 flex-wrap  ">
           <TableContainer>
             <Table size="sm">
               <Thead className="bg-gray-200">
@@ -204,7 +211,9 @@ const Scategory = () => {
                             variant={"solid"}
                             colorScheme="green"
                             onClick={onOpen2}
-                            onClickCapture={() => setCID(e.categories.category_id)}
+                            onClickCapture={() =>
+                              setCID(e.categories.category_id)
+                            }
                           >
                             Update
                           </Button>
@@ -214,7 +223,9 @@ const Scategory = () => {
                             variant={"solid"}
                             colorScheme="red"
                             onClick={onOpen3}
-                            onClickCapture={() => setCID(e.categories.category_id)}
+                            onClickCapture={() =>
+                              setCID(e.categories.category_id)
+                            }
                           >
                             Delete
                           </Button>
@@ -321,9 +332,7 @@ const Scategory = () => {
               <ModalHeader>Delete Subcategory</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                <p>
-                  Do you want to delete Category? 
-                </p>
+                <p>Do you want to delete Category?</p>
               </ModalBody>
 
               <ModalFooter>
@@ -338,7 +347,7 @@ const Scategory = () => {
               </ModalFooter>
             </ModalContent>
           </Modal>
-        </div>
+        </motion.div>
       </div>
     </>
   );
