@@ -29,6 +29,7 @@ export default function App({ Component, pageProps }) {
             <PersistGate loading={null} persistor={persistor}>
               {!path.includes("/login") && <AdminBar />}
               <Component {...pageProps} />
+              <Footer />
             </PersistGate>
           </Provider>
         </ChakraProvider>

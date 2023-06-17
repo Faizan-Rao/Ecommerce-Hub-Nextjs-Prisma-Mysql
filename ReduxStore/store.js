@@ -16,6 +16,7 @@ import autoMergeLevel1 from "reduxjs-toolkit-persist/lib/stateReconciler/autoMer
 import { userSlice } from "@/services/LocalSlices/UserLocalSlice";
 import { sadminApi } from "@/services/sadminApiSlice";
 import { adminSlice } from "@/services/LocalSlices/AdminLocalSlice";
+import { adminApi } from "@/services/adminApiSlice";
 
 const persistConfig = {
   key: "root",
@@ -27,6 +28,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [sadminApi.reducerPath]: sadminApi.reducer,
+  [adminApi.reducerPath]: adminApi.reducer,
   cart: cartReducer,
   user: userSlice.reducer,
   admin: adminSlice.reducer,
@@ -42,7 +44,7 @@ const store = configureStore({
         /* ignore persistance actions */
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([userApi.middleware, sadminApi.middleware]),
+    }).concat([userApi.middleware, sadminApi.middleware, adminApi.middleware]),
 });
 const persistor = persistStore(store);
 

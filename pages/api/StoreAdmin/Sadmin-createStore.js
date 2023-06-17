@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         purchase_date: new Date(),
         purchase_quantity: 1,
         purchase_type: "store",
-        purchase_status: "full-filled",
+        purchase_status: "dispatched",
         purchase_title: "Purchased Store",
         store_id: 0,
         billing:{

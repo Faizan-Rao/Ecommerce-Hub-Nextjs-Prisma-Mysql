@@ -35,7 +35,7 @@ export default async function handler (req, res)
           },
           data:adminData
          })
-         console.log(update, updateAdmin);
+        
          res.json({update, updateAdmin})
         }
     }

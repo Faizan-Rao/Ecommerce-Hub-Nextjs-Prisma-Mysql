@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TrackOrder from "@/components/StoreAdmin/TrackOrder";
 import {
   useCreateStoreMutation,
+  useSgetCategoryQuery,
   useSgetOrdersQuery,
   useSgetRevenueQuery,
 } from "@/services/sadminApiSlice";
@@ -30,8 +31,11 @@ const StoreAdmin = () => {
   const store_id = useSelector((state) => state.user.store.store_id);
   const { data: revenue } = useSgetRevenueQuery({ store_id });
   const { data: orders } = useSgetOrdersQuery({ store_id });
+  const {data: categories} = useSgetCategoryQuery(store_id)
+  
+  
   const store = useSelector((state) => state.user.store);
-  console.log(orders);
+ 
   return (
     <>
       {store.store_id && (
@@ -55,17 +59,11 @@ const StoreAdmin = () => {
               </span>{" "}
               <span>Revenue</span>
             </div>
-            <div className="text-2xl aspect-square font-bold bg-white shadow-lg   text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
-              <FaProductHunt className="text-2xl" />
-              <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
-                {revenue?.revenue || 0}
-              </span>{" "}
-              <span>Products</span>
-            </div>
+            
             <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
               <BiCategory className="text-2xl" />
               <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
-                {revenue?.revenue || 0}
+                {categories?.length || 0}
               </span>{" "}
               <span>Categories</span>
             </div>
@@ -76,7 +74,7 @@ const StoreAdmin = () => {
       {!store.store_id && (
         <div className="flex flex-col shadow-lg p-5 justify-center items-center gap-8 m-5 bg-white rounded-full">
           <h1 className="text-4xl  text-[#3ba33b] font-semibold">Your Store</h1>
-          <p>You don't have a Store Yet Create One </p>
+          <p>You dont have a Store Yet Create One </p>
           <div className="flex  justify-center items-center gap-8 flex-wrap m-5">
             <Button
               onClick={onOpen}

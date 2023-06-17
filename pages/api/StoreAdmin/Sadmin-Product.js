@@ -89,7 +89,7 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const { product_id } = req.body;
-    console.log(product_id)
+    
     const deleteProduct = await prisma.products.delete({
       where: {
         product_id : parseInt(product_id),

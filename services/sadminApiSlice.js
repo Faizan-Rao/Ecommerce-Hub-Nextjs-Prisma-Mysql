@@ -36,6 +36,7 @@ export const sadminApi = createApi({
       query: (subId) => `/Sadmin-getProduct?subId=${subId}`,
       providesTags: ["product"],
     }),
+    
     getStore: builder.mutation({
       query: (body) => ({
         url: `/Sadmin-getStore`,

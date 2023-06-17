@@ -4,8 +4,10 @@ import { BsCurrencyDollar, BsFillBasketFill } from "react-icons/bs";
 import { BiCategory } from "react-icons/bi";
 import { FaProductHunt } from "react-icons/fa";
 import Link from "next/link";
+import { useGetStatsQuery } from "@/services/adminApiSlice";
 
 const MainAdmin = () => {
+  const {data} = useGetStatsQuery()
   return (
     <>
       <div className=" flex justify-center items-center flex-col  gap-5 m-5">
@@ -15,28 +17,28 @@ const MainAdmin = () => {
           <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-full  px-9 flex justify-center items-center flex-col">
             <BsFillBasketFill className="text-2xl" />{" "}
             <span className="aspect-[7/4] text-center font-semibold p-4 rounded-full ">
-              {0}
+              {data?.totalStore}
             </span>{" "}
             <span>Stores</span>
           </div>
           <div className="text-2xl aspect-square font-bold  bg-white shadow-lg   text-green-600 min-h-[200px] rounded-full  px-9 flex justify-center items-center flex-col">
             <BsCurrencyDollar className="text-2xl" />
             <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
-              {0}
+              {data?.totalRevenue}
             </span>{" "}
             <span>Revenue</span>
           </div>
           <div className="text-2xl aspect-square font-bold bg-white shadow-lg   text-green-600 min-h-[200px] rounded-full  px-9 flex justify-center items-center flex-col">
             <FaProductHunt className="text-2xl" />
             <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
-              {0}
+              {data?.totalCustomers}
             </span>{" "}
             <span>Customers</span>
           </div>
           <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-full  px-9 flex justify-center items-center flex-col">
             <BiCategory className="text-2xl" />
             <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
-              {0}
+              {data?.totalAdmins}
             </span>{" "}
             <span>Admins</span>
           </div>

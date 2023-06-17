@@ -1,8 +1,11 @@
+import AdminForm from '@/components/Admin/AdminForm'
 import React from 'react'
 
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div className='flex justify-center items-center m-5'>
+      <AdminForm/>
+    </div>
   )
 }
 

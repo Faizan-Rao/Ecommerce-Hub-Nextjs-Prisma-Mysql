@@ -111,7 +111,7 @@ model purchase_record {
   purchase_status   String          @db.VarChar(45)
   product_id        Int?
   bill_id           Int
-  store_id          Int
+  store_id          Int?
   cancellations     cancellations[]
   billing           billing         @relation(fields: [bill_id], references: [bill_id], onDelete: Cascade, map: "fk_purchase_record_billing1")
 

@@ -127,7 +127,7 @@ export const OrderRemovalForm = ({onOpen, onClose,isOpen, orderID, removeOrder, 
                 position: "top",
                 duration: 4000,
               });
-              console.log(payload)
+             
         }
         catch(err)
         {

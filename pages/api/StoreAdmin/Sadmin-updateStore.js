@@ -26,7 +26,7 @@ export default async function handler (req, res)
           }
          })
          
-         console.log(update, );
+        
          res.json({update})
         }
     }

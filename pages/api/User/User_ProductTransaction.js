@@ -30,7 +30,7 @@ export default async function handler(req, res) {
           if (e.purchase_quantity > 0) {
             return {
               store_id: e.store_id,
-              purchase_amount: e.purchase_amount,
+              purchase_amount: e.purchase_amount * 0.7,
               purchase_quantity: e.purchase_quantity,
               purchase_title: e.purchase_title,
               product_id: e.product_id,

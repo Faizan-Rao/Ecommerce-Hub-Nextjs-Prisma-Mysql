@@ -26,7 +26,7 @@ const Detail = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const user = useSelector((state) => state.user.data);
   const { data, isLoading, isUninitialized } = useGetProductDetailQuery(prodId);
-  console.log(data);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [Feedback, setFeedback] = useState(0);
   const [userFeedBack] = useUserFeedbackMutation();
@@ -40,7 +40,7 @@ const Detail = () => {
     };
     try {
       const payload = await userFeedBack(feedbackBody).unwrap();
-      console.log(payload);
+     
       toast({
         title: `Thanks for Your Feedback`,
         status: "success",
