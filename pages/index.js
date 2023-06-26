@@ -4,6 +4,7 @@ import { useGetRecommendedQuery } from "@/services/userApiSlice";
 import ProductCard from "@/components/User/ProductCard";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import FeaturedProducts from "@/components/User/FeaturedProducts";
 const inter = Inter({ subsets: ["latin"] });
 // Home Entry Point User
 export default function Home() {
@@ -16,11 +17,11 @@ export default function Home() {
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{duration:0.5}}
-        className="m-5 flex justify-center items-center flex-col"
+        className="m-5 flex  flex-col"
       >
-        <h1 className="text-3xl p-5">Product Recommendation</h1>
+        <h1 className="text-3xl p-5 self-center">Product Recommendation</h1>
         <div
-          className={"flex items-center justify-center flex-wrap gap-8 my-4 "}
+          className={"flex justify-center items-center  flex-wrap gap-20 bg-gray-100 rounded-xl overflow-hidden p-5  my-4 "}
         >
           {isLoading ? (
             <p>Loading</p>
@@ -31,6 +32,11 @@ export default function Home() {
           )}
         </div>
       </motion.div>
+      {/* Featured Products */}
+      <div className="lg:block md:block sm:hidden">
+      <FeaturedProducts/>
+
+      </div>
       {/* Call To Action */}
       <motion.div
         initial={{ scale: 0 }}

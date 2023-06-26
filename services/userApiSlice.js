@@ -34,7 +34,10 @@ export const userApi = createApi({
         `/User_Orders?customer_id=${customer_id}`,
       providesTags: ['prod_Tran'],
     }),
-    
+    getFeatured: builder.query({
+      query: () =>
+        `/User_FeaturedProducts`,
+    }),
     dynamicSearch: builder.query({
       query: ({ search, minPrice, maxPrice }) =>
         `/User_DynamicSearch?search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
@@ -99,4 +102,5 @@ export const {
   useUserProductTranMutation,
   useGetOrdersQuery,
   useRemoveOrderMutation,
+  useGetFeaturedQuery,
 } = userApi;

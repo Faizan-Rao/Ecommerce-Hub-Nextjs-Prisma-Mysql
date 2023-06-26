@@ -24,15 +24,15 @@ const ProductCard = ({ data }) => {
   const path = useRouter().pathname;
   console.log(data)
   return (
-    <Card maxW="xs">
+    <Card maxW="xs" my={1}>
       <CardBody>
         <Image
           src={"/images/" + data.product_image }
           alt="Green double couch with wooden legs"
           height={150}
-          width={300}
+          width={230}
           className="object-cover"
-          borderRadius="lg"
+          borderRadius="xl"
         />
         <Stack mt="6" spacing="3">
           <Heading size="md">{data.product_title}</Heading>
