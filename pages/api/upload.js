@@ -18,6 +18,7 @@ const readFile = (req, saveLocally) => {
   }
   options.maxFileSize = 4000 * 1024 * 1024;
   const form = formidable(options);
+  
   return new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
@@ -34,7 +35,7 @@ const handler = async (req, res) => {
   }
   try
   {
-    console.log(req.body)
+   
       const promise =  await readFile(req, true);
       return res.json({data: promise.files})
   }
