@@ -44,6 +44,13 @@ export const sadminApi = createApi({
         body,
       }),
     }),
+    getFilteredOrder: builder.mutation({
+      query: (body) => ({
+        url: `/Sadmin-FilterOrder`,
+        method: "POST",
+        body,
+      }),
+    }),
     dispatchOrder: builder.mutation({
       query: (body) => ({
         url: `/Sadmin-Orders`,
@@ -171,4 +178,5 @@ export const {
   useSdeleteSubCategoryMutation,
   useSupdateSubCategoryMutation,
   useCreateStoreMutation,
+  useGetFilteredOrderMutation,
 } = sadminApi;

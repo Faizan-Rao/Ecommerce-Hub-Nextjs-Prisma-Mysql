@@ -41,7 +41,7 @@ const Products = () => {
         </div>
         <div className="flex items-center gap-2">
           {" "}
-          <span>Min: </span>
+          <span>Min Price: </span>
           <input
             type="number"
             className="p-2 rounded-lg outline-none inline-block border-2"
@@ -53,7 +53,7 @@ const Products = () => {
         </div>
         <div className="flex items-center gap-2">
           {" "}
-          <span>Max: </span>
+          <span>Max Price: </span>
           <input
             type="number"
             className="p-2 rounded-lg outline-none inline-block border-2"
@@ -77,7 +77,7 @@ const Products = () => {
         </div>
       </form>
 
-      {/* All Product Grid */}
+      {/* All Product Grid
       <div className="m-5 flex justify-center items-center flex-col ">
         <h1 className="text-3xl p-5">Products</h1>
       </div>
@@ -93,7 +93,7 @@ const Products = () => {
             })
           )}
         </div>
-      )}
+      )} */}
       {SearchProduct && (
         <div
           className={"flex items-center justify-center  flex-wrap gap-4 my-4  "}

@@ -51,6 +51,7 @@ export default function App({ Component, pageProps }) {
             <PersistGate loading={null} persistor={persistor}>
               <Navbar />
               <Banner />
+              
               <CartDrawer />
               <Component cart={cart} setCart={setCart} {...pageProps} />
               <Footer />
