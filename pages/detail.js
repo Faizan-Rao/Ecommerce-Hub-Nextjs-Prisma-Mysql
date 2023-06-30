@@ -75,11 +75,11 @@ const Detail = () => {
       ) : (
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="container px-5 py-24 mx-auto">
-            <div className="lg:w-4/5 mx-auto flex flex-wrap">
+            <div className="lg:w-4/5 flex flex-wrap  mx-auto">
               {/* Product Image */}
               <Image
                 alt="ecommerce"
-                className=" lg:w-1/2 w-full lg:h-auto overfolow-hidden h-24  object-cover object-center rounded-lg"
+                className=" lg:w-1/2 sm:h-[50%] sm:w-full w-full lg:h-auto inline  h-16  object-cover object-center rounded-lg"
                 src={
                   "/images/" + data?.data[0]?.product_image }
                 width={300}

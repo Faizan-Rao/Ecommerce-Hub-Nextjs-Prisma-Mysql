@@ -39,9 +39,9 @@ const StoreAdmin = () => {
     <div>
       {store.store_id && (
         <div
-          className=" flex justify-center items-center flex-col  gap-5 m-5"
+          className=" flex justify-center items-center flex-col  gap-5 mx-20 my-5"
         >
-          <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
+          <h1 className="text-3xl self-start px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">
             Dashboard
           </h1>
           {/* Data ICONS */}
@@ -82,9 +82,9 @@ const StoreAdmin = () => {
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col shadow-lg p-5 justify-center items-center gap-8 m-5 bg-white rounded-full"
+          className="flex flex-col shadow-lg p-5 justify-center items-center gap-8 mx-20 my-5 bg-white rounded-full"
         >
-          <h1 className="text-4xl  text-[#3ba33b] font-semibold">Your Store</h1>
+          <h1 className="text-3xl  px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">Your Store</h1>
           <p>You dont have a Store Yet Create One </p>
           <div className="flex  justify-center items-center gap-8 flex-wrap m-5">
             <Button
@@ -106,9 +106,9 @@ const StoreAdmin = () => {
       )}
       {store.store_id && (
         <div
-          className=" justify-center items-center flex flex-col gap-8 m-5 "
+          className=" justify-center items-center flex flex-col gap-8 mx-20 my-5 "
         >
-          <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
+          <h1 className="text-3xl self-start px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">
             Your Orders
           </h1>
           <motion.div

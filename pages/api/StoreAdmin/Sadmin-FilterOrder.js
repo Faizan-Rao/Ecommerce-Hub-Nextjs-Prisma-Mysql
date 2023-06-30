@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
       const { minDate, maxDate, store_id } = req.body;
 
-      if (!minDate || !maxDate) return res.json({});
+      if (!minDate || !maxDate) return res.json([]);
 
       const data = await prisma.purchase_record.findMany({
         where: {

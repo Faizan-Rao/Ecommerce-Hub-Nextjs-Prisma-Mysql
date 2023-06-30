@@ -23,7 +23,10 @@ const Sorders = () => {
   const store_id = useSelector((state) => state.user.store.store_id);
   const { data, isLoading } = useSgetDispatchOrderQuery(store_id);
   const { data: revenue } = useSgetRevenueQuery({ store_id });
-  const [dateFilter, setDateFilter] = useState({});
+  const [dateFilter, setDateFilter] = useState({
+    minDate : "",
+    maxDate : new Date().toISOString().split('T')[0]
+  });
   const [filterOrder] = useGetFilteredOrderMutation();
   const [filterData, setFilterData] = useState();
   const [filteredRevenue, setFilteredRevenue] = useState(0);
@@ -36,6 +39,7 @@ const Sorders = () => {
       maxDate: dateFilter.maxDate,
       store_id,
     };
+    console.log(dataPayload)
     const payload = await filterOrder(dataPayload).unwrap();
     if (payload) setFilterData(payload);
     let revenue = payload.reduce(
@@ -54,8 +58,8 @@ const Sorders = () => {
   };
   return (
     <>
-      <div className="flex flex-col  justify-center  gap-8 m-5">
-        <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
+      <div className="flex flex-col  justify-center  gap-8 mx-20 my-5">
+        <h1 className="text-3xl self-start px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">
           Dispatched List
         </h1>
         <div className="flex  justify-center items-center flex-wrap gap-9 my-8">

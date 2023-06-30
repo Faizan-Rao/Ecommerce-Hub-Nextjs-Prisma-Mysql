@@ -27,8 +27,8 @@ const Stores = () => {
   
   return (
     <>
-      <div className="flex flex-col  justify-center  gap-8 m-5">
-        <h1 className="text-4xl self-start text-[#3ba33b] font-semibold">
+      <div className="flex flex-col  justify-center  gap-8 mx-20 my-5">
+        <h1 className="text-3xl self-start px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">
           Customers
         </h1>
         <motion.div

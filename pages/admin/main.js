@@ -47,7 +47,7 @@ const MainAdmin = () => {
             <span>Admins</span>
           </div>
         </motion.div>
-          <h1 className="text-4xl  my-10 text-[#3ba33b] font-semibold">
+          <h1 className="text-3xl  my-10 px-5 py-3 bg-green-500 rounded-full text-white font-bold shadow-lg">
           Admin Dashboard
         </h1>
       </div>

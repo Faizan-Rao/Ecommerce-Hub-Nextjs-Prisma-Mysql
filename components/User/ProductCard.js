@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image'
 import {
   Card,
   CardHeader,
@@ -8,7 +9,7 @@ import {
   Heading,
   Text,
   Divider,
-  Image,
+  
   ButtonGroup,
   Button,
 } from "@chakra-ui/react";
@@ -31,7 +32,8 @@ const ProductCard = ({ data }) => {
           alt="Green double couch with wooden legs"
           height={150}
           width={230}
-          className="object-cover"
+          quality={70}
+          className="object-cover overflow-hidden h-[150px] w-[230]"
           borderRadius="xl"
         />
         <Stack mt="6" spacing="3">

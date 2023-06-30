@@ -21,10 +21,10 @@ const FeaturedProducts = () => {
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="m-5 flex  flex-col  rounded-xl"
+        className="m-20 flex  flex-col  rounded-xl"
         key={e.subcategory_id}
       >
-        <h1 className="text-3xl p-5">{e.subcategory_title}</h1>
+        <h1 className="text-3xl px-5 py-3 bg-green-500 mb-8 rounded-full text-white font-bold shadow-lg self-start">{e.subcategory_title}</h1>
         
           <Swiper
             slidesPerView={4}

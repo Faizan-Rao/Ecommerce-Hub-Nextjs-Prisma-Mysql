@@ -17,11 +17,11 @@ export default function Home() {
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{duration:0.5}}
-        className="m-5 flex  flex-col"
+        className="mx-20 my-5 flex  flex-col"
       >
-        <h1 className="text-3xl p-5 self-center">Product Recommendation</h1>
+        <h1 className="text-3xl  self-center px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">Product Recommendation</h1>
         <div
-          className={"flex justify-center items-center  flex-wrap gap-20 bg-gray-100 rounded-xl overflow-hidden p-5  my-4 "}
+          className={"flex justify-center items-center  flex-wrap gap-20 bg-gray-200 rounded-xl overflow-hidden p-5  my-4 "}
         >
           {isLoading ? (
             <p>Loading</p>

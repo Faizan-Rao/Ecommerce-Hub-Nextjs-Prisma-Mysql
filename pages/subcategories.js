@@ -13,7 +13,7 @@ const SubCategory = () => {
       whileInView={{ scale: 1 }}
       viewport={{ once: true }}
       transition={{duration:0.5}} className="m-5 flex justify-center items-center flex-col">
-          <h1 className="text-3xl p-5">Subcategories</h1>
+          <h1 className="text-3xl px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">Subcategory</h1>
           <div className="flex justify-center items-center  flex-wrap gap-8 p-8">
             {
               isLoading ? <p>Loading</p> : 

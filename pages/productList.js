@@ -12,7 +12,7 @@ const ProductList = () => {
     whileInView={{ scale: 1 }}
     viewport={{ once: true }}
     transition={{duration:0.5}} className="m-5 flex items-center justify-center flex-col">
-        <h1 className="text-3xl p-5">Product List</h1>
+        <h1 className="text-3xl px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">Product List</h1>
         <div
           className={"flex items-center  flex-wrap gap-4 my-4 "}
         >
