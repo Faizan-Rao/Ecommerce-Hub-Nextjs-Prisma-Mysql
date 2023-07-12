@@ -13,36 +13,49 @@ export default function Home() {
     <>
       {/* Popular Products */}
       <motion.div
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
+        // initial={{ scale: 0 , x:"-100%" }}
+        initial={{ opacity: 0, y: "20%" }}
+        // whileInView={{ scale: 1, x:0 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{duration:0.5}}
+        transition={{ duration: 0.7, ease: "easeInOut" }}
         className="mx-20 my-5 flex  flex-col"
       >
-        <h1 className="text-3xl  self-center px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">Product Recommendation</h1>
+        <h1 className="text-3xl  self-center px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">
+          Product Recommendation
+        </h1>
         <div
-          className={"flex justify-center items-center  flex-wrap gap-20 bg-gray-200 rounded-xl overflow-hidden p-5  my-4 "}
+          className={
+            "flex justify-center items-center  flex-wrap gap-20 bg-gray-200 rounded-xl overflow-hidden p-5  my-4 "
+          }
         >
-          {isLoading ? (
-            <p>Loading</p>
-          ) : (
+          {!isLoading  &&
             data?.data?.map((e) => {
-              return <ProductCard key={e.product_id} data={e} />;
+              return (
+                <motion.div
+                  initial={{ x: "-100%", opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.7 }}
+                  viewport={{ once: true }}
+                  key={e.product_id}
+                >
+                  <ProductCard data={e} />
+                </motion.div>
+              );
             })
-          )}
+          }
         </div>
       </motion.div>
       {/* Featured Products */}
       <div className="lg:block md:block sm:hidden">
-      <FeaturedProducts/>
-
+        <FeaturedProducts />
       </div>
       {/* Call To Action */}
       <motion.div
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
-        transition={{duration:0.5}}
+        transition={{ duration: 0.5 }}
         className="m-5 flex justify-center items-center flex-col  bg-[#F3F4F6] rounded-full  p-8"
       >
         <h1 className="text-3xl p-5">Call To Action</h1>
@@ -84,13 +97,17 @@ export default function Home() {
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
-        transition={{duration:0.5}}
+        transition={{ duration: 0.5 }}
         className="m-5 flex justify-center items-center flex-col "
       >
-        <h1 className="text-3xl p-5">Our Partner</h1>
+        <h1 className="text-3xl  self-center px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">Our Partner</h1>
         <div className="flex justify-center items-center flex-col  gap-8 aspect-[8/2] p-8">
           <ul className="flex justify-center items-center  gap-8 flex-wrap">
-            <li className="flex gap-3 items-center  aspect-square p-4 bg-white overflow-hidden rounded-full shadow-lg">
+            <motion.li
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex gap-3 items-center  aspect-square p-4 bg-white overflow-hidden rounded-full shadow-lg"
+            >
               {" "}
               <Image
                 src={"/brandLogo/apple.png"}
@@ -99,8 +116,12 @@ export default function Home() {
                 width={200}
                 alt="Apple"
               />
-            </li>
-            <li className="flex gap-3 items-center aspect-square p-4 bg-white bg-blend-darken overflow-hidden rounded-full shadow-lg">
+            </motion.li>
+            <motion.li
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex gap-3 items-center aspect-square p-4 bg-white bg-blend-darken overflow-hidden rounded-full shadow-lg"
+            >
               {" "}
               <Image
                 src={"/brandLogo/samsung.png"}
@@ -109,8 +130,12 @@ export default function Home() {
                 width={200}
                 alt="Samsung"
               />
-            </li>
-            <li className="flex gap-3 items-center aspect-square p-4 bg-white bg-blend-darken overflow-hidden rounded-full shadow-lg">
+            </motion.li>
+            <motion.li
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex gap-3 items-center aspect-square p-4 bg-white bg-blend-darken overflow-hidden rounded-full shadow-lg"
+            >
               {" "}
               <Image
                 src={"/brandLogo/sony.png"}
@@ -119,7 +144,7 @@ export default function Home() {
                 width={200}
                 alt="Sony"
               />
-            </li>
+            </motion.li>
           </ul>
         </div>
       </motion.div>

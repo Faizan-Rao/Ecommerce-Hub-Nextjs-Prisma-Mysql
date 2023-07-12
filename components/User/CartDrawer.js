@@ -15,7 +15,7 @@ import { getCartTotal, removeToCart } from "@/services/LocalSlices/CartLocalSlic
 import { addOne, removeOne } from "@/services/LocalSlices/CartLocalSlice";
 import { ImBin } from "react-icons/im";
 import Link from "next/link";
-
+import {motion} from 'framer-motion'
 const CartDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -71,10 +71,17 @@ const CartDrawer = () => {
               </div>
             )}
             {/* Cart Items */}
+            {cart.length === 0 && <h1 className="font-semibold p-2 mx-auto text-center bg-gray-300 rounded-lg text-lg  text-white"> Cart is Empty</h1>}
             {cart &&
               cart.map((e, i) => {
                 return (
-                  <div key={i}>
+                  <motion.div
+                  initial={{ opacity: 0}}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5, ease:'easeInOut' }}
+                  viewport={{ once: true }}
+                  
+                 key={i}>
                     <div className="flex flex-col gap-2 justify-between my-5 bg-slate-100 p-4 rounded-lg">
                       <div className="text-gray-500 text-lg font-semibold">
                         {e.product_title}
@@ -123,7 +130,7 @@ const CartDrawer = () => {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
           </DrawerBody>

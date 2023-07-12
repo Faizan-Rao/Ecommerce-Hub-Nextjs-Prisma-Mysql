@@ -46,10 +46,10 @@ const StoreAdmin = () => {
           </h1>
           {/* Data ICONS */}
           <motion.div
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
+          initial={{ opacity: 0}}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }} className="flex justify-center items-center  gap-8 flex-wrap my-5">
+          transition={{ duration: 0.7 }} className="flex justify-center items-center  gap-8 flex-wrap my-5">
             <div className="text-2xl aspect-square font-bold  bg-white shadow-lg text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
               <BsFillBasketFill className="text-2xl" />{" "}
               <span className="aspect-[7/4] text-center font-semibold p-4 rounded-full ">
@@ -78,8 +78,8 @@ const StoreAdmin = () => {
       {/* Store and Profile */}
       {!store.store_id && (
         <motion.div
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
+           initial={{ opacity: 0}}
+        whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="flex flex-col shadow-lg p-5 justify-center items-center gap-8 mx-20 my-5 bg-white rounded-full"
@@ -112,8 +112,8 @@ const StoreAdmin = () => {
             Your Orders
           </h1>
           <motion.div
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
+           initial={{ opacity: 0}}
+           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}>
           <TrackOrder />

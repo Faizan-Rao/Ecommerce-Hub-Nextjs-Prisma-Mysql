@@ -44,10 +44,10 @@ const TrackOrder = () => {
   return (
     <>
       <motion.div
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
+        initial={{ opacity: 0}}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{duration:0.5}} className=" mx-20 my-5 overflow-auto flex flex-col justify-center items-center">
+        transition={{duration:0.7}} className=" mx-20 my-5 overflow-auto flex flex-col justify-center items-center">
         <h1 className="text-3xl  px-5 py-3 bg-green-500 my-10 rounded-full text-white font-bold shadow-lg">Track Orders</h1>
         {/* Table For Order Items */}
         <TableContainer>

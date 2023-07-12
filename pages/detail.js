@@ -64,17 +64,17 @@ const Detail = () => {
   };
   return (
     <motion.div
-    initial={{ scale: 0 }}
-    whileInView={{ scale: 1 }}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
     viewport={{ once: true }}
-    transition={{duration:0.5}}>
+    transition={{duration:0.7}}>
       {isLoading ? (
         <p>Loading</p>
       ) : isUninitialized ? (
         <p>UnIntialized</p>
       ) : (
         <section className="text-gray-600 body-font overflow-hidden">
-          <div className="container px-5 py-24 mx-auto">
+          <div className="container px-5 py-24 bg-white mx-auto">
             <div className="lg:w-4/5 flex flex-wrap  mx-auto">
               {/* Product Image */}
               <Image
@@ -113,8 +113,16 @@ const Detail = () => {
                   </span>
                   <div className="flex justify-end gap-3 my-4">
                   <button
-                    onClick={() => dispatch(addToCart(data?.data[0]))}
-                    className="flex ml-auto text-white bg-[#38a169] border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded"
+                    onClick={() => {dispatch(addToCart(data?.data[0]));
+                      toast({
+                        title: `Item Added Successfully`,
+                        status: "success",
+                        isClosable: true,
+                        position: "top",
+                        duration: 1000,
+                      })
+                    }}
+                    className="flex ml-auto font-bold text-white bg-[#38a169] border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded"
                   >
                     Add to Cart
                   </button>

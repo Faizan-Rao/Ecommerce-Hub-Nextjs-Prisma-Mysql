@@ -26,7 +26,9 @@ const Products = () => {
     <>
       {/* Product Searching */}
       <form className="flex justify-center  item-center text-lg  font-semibold p-5 rounded-full  gap-4 flex-wrap m-5">
-        <div className="flex justify-center items-center  gap-2">
+        <div
+          
+           className="flex justify-center items-center  gap-2">
           {" "}
           <span>Search: </span>
           <input
@@ -39,7 +41,8 @@ const Products = () => {
             autoComplete="off"
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2">
           {" "}
           <span>Min Price: </span>
           <input
@@ -51,7 +54,8 @@ const Products = () => {
             id=""
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div
+           className="flex items-center gap-2">
           {" "}
           <span>Max Price: </span>
           <input
@@ -96,13 +100,19 @@ const Products = () => {
       )} */}
       {SearchProduct && (
         <div
-          className={"flex items-center justify-center  flex-wrap gap-4 my-4  "}
+          className={"flex items-center justify-center  flex-wrap gap-20 my-4  "}
         >
           {isLoadingSearch ? (
             <p>Loading</p>
           ) : (
             SearchProduct?.data?.map((e) => {
-              return <ProductCard key={e.product_id} data={e} />;
+              return (<motion.div
+                initial={{ x: "-100%", opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                key={e.product_id}
+              ><ProductCard  data={e} /></motion.div>);
             })
           )}
         </div>
