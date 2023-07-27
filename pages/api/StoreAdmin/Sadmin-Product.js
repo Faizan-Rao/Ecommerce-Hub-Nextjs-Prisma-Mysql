@@ -22,7 +22,6 @@ const createProduct = async (req, res) => {
       product_image,
       product_price,
       product_title,
-      product_discount,
       product_stock_status,
       product_warranty,
       subcategory_id,
@@ -34,7 +33,6 @@ const createProduct = async (req, res) => {
       product_image,
       product_price: parseFloat(product_price),
       product_stock_status: parseFloat(product_stock_status),
-      product_discount: parseFloat(product_discount),
       product_title,
       product_warranty,
       store_id: parseInt(store_id),
@@ -60,7 +58,6 @@ const updateProduct = async (req, res) => {
       product_image,
       product_price,
       product_title,
-      product_discount,
       product_stock_status,
       product_warranty,
       product_id,
@@ -73,7 +70,6 @@ const updateProduct = async (req, res) => {
     if (product_stock_status)
       data.product_stock_status = parseFloat(product_stock_status);
     if (product_price) data.product_price = parseFloat(product_price);
-    if (product_discount) data.product_discount = parseFloat(product_discount);
     if (product_warranty) data.product_warranty = product_warranty;
 
     const update = await prisma.products.update({

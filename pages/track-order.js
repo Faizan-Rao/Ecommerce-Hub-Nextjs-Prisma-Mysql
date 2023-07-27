@@ -108,7 +108,7 @@ export const TableRow = ({ order }) => {
           <Td>{e.purchase_date.toString().split("T")[0]}</Td>
           {/* Total Price */}
           <Td isNumeric>
-            <span className="text-gray-500">Rs.{e.purchase_amount}</span>
+            <span className="text-gray-500">${e.purchase_amount}</span>
           </Td>
           {/* Cancellation Button */}
           <Td></Td>

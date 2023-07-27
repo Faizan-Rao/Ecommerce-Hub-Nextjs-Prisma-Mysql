@@ -21,7 +21,7 @@ export default function Home() {
         transition={{ duration: 0.7, ease: "easeInOut" }}
         className="mx-20 my-5 flex  flex-col"
       >
-        <h1 className="text-3xl sm:text-center self-center px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">
+        <h1 className="text-3xl  self-center px-5 py-3 bg-green-500 my-5 rounded-full text-white font-bold shadow-lg">
           Product Recommendation
         </h1>
         <div
@@ -56,7 +56,7 @@ export default function Home() {
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="m-6 flex justify-center items-center flex-col  bg-white  rounded-full  p-8"
+        className="m-5 flex justify-center items-center flex-col  bg-[#F3F4F6] rounded-full  p-8"
       >
         <h1 className="text-3xl p-5">Call To Action</h1>
         <div className="flex justify-center items-center flex-col gap-8 p-4">
@@ -65,7 +65,7 @@ export default function Home() {
             <li>
               {" "}
               <Link
-                href={"/Store"}
+                href={"#"}
                 className="bg-[#38a169] hover:bg-[green]  text-[white] px-4 py-2  rounded shadow-lg m-4"
               >
                 Store

@@ -109,15 +109,11 @@ const Detail = () => {
                 {/* Product Price and Add To Cart */}
                 <div className="flex justify-between items-center flex-wrap ">
                   <span className="title-font font-medium text-2xl text-gray-900">
-                    Rs.{data?.data[0]?.product_price} - <span className="text-red-500 text-[18px]">{data?.data[0]?.product_discount}% Discount</span> 
+                    ${data?.data[0]?.product_price}.00
                   </span>
                   <div className="flex justify-end gap-3 my-4">
                   <button
-                    onClick={() => {
-                      let e = {...data?.data[0],};
-                      let discount = e.product_price - (e.product_price * (parseFloat(e.product_discount) / 100))
-                      e.product_price = discount
-                      dispatch(addToCart(e));
+                    onClick={() => {dispatch(addToCart(data?.data[0]));
                       toast({
                         title: `Item Added Successfully`,
                         status: "success",

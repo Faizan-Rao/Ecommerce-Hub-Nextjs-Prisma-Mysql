@@ -86,7 +86,6 @@ const TrackOrder = () => {
                     </Tr>
                   </Thead>
                   <Tbody overflow={'auto'} className="bg-white overflow-auto">
-                  
                   {!isLoading &&
             data.orders.map((e, i) => {
               return (  <Tr key={i + 1}>
@@ -107,7 +106,7 @@ const TrackOrder = () => {
                       {/* Total Price */}
                       <Td isNumeric>
                         <span className="text-gray-500">
-                          Rs.{e.purchase_amount}
+                          ${e.purchase_amount}
                         </span>
                       </Td>
                       <Td isNumeric>{e.bill_id}</Td>
@@ -128,7 +127,7 @@ const TrackOrder = () => {
                 </Table>
             
           </TableContainer>
-          {data?.orders?.length === 0 && <h1 className="font-semibold p-2 mx-auto text-center bg-gray-300  text-lg  "> No Orders Yet</h1> }
+              
                 
    </>
   );

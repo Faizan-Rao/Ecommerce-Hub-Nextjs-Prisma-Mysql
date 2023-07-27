@@ -58,17 +58,12 @@ const Cart = () => {
                 <Th>Product-Title</Th>
                 <Th>Product-Quantity</Th>
                 <Th>Product-warranty</Th>
-                <Th>Discounted-Price</Th>
-                <Th>Product-price</Th>
-                <Th>Product-Discount</Th>
+                <Th>Product-Price</Th>
                 <Th></Th>
               </Tr>
             </Thead>
             <Tbody className="bg-white">
               {cart.map((e, i) => {
-                // console.log(e.product_price * (parseFloat(e.product_discount) / 100))
-                console.log(e)
-                // console.log(e.product_price - (e.product_price * (parseFloat(e.product_discount) / 100)))
                 return (
                   <Tr key={i}>
                     <Td>{i + 1}</Td>
@@ -103,11 +98,7 @@ const Cart = () => {
                     <Td isNumeric>{e.product_warranty}</Td>
                     {/* Price of Product */}
                     <Td isNumeric>
-                      <span className="text-gray-500">Rs.{e.product_price }</span>
-                    </Td>
-                    
-                    <Td isNumeric>
-                      <span className="text-gray-500">{e.product_discount}%</span>
+                      <span className="text-gray-500">${e.product_price}</span>
                     </Td>
                     <Td>
                       <button
@@ -140,7 +131,7 @@ const Cart = () => {
             <Tbody className="bg-white">
               <Tr>
                 <Td isNumeric fontWeight={"semibold"}>
-                  Rs.{totalPrice}
+                  ${totalPrice}
                 </Td>
                 <Td isNumeric fontWeight={"semibold"}>
                   {totalQuantity}
