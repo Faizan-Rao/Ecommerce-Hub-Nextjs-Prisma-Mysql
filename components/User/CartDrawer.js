@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartTotal, removeToCart } from "@/services/LocalSlices/CartLocalSlice";
 import { addOne, removeOne } from "@/services/LocalSlices/CartLocalSlice";
 import { ImBin } from "react-icons/im";
+import {AiOutlineArrowUp} from "react-icons/ai"
 import Link from "next/link";
 import {motion} from 'framer-motion'
 const CartDrawer = () => {
@@ -33,6 +34,13 @@ const CartDrawer = () => {
 
   return (
     <div >
+       <Link
+        href={"#"}
+        className="fixed bottom-16 z-10 right-3 text-xl text-[white] p-2 bg-[#3f3f3f] rounded-lg flex items-center hover:bg-[green]"
+      >
+        {" "}
+        <AiOutlineArrowUp className="mx-2" /> 
+      </Link>
       {/* Cart Button */}
       <button
         onClick={onOpen}
@@ -62,7 +70,7 @@ const CartDrawer = () => {
                 </Link>
                 <div className="font-semibold text-lg">
                   Total Amount:{" "}
-                  <span className="text-gray-500">${totalPrice}</span>{" "}
+                  <span className="text-gray-500">Rs.{totalPrice}</span>{" "}
                 </div>
                 <div className="font-semibold text-lg">
                   Total Items:{" "}
@@ -71,7 +79,7 @@ const CartDrawer = () => {
               </div>
             )}
             {/* Cart Items */}
-            {cart.length === 0 && <h1 className="font-semibold p-2 mx-auto text-center bg-gray-300 rounded-lg text-lg  text-white"> Cart is Empty</h1>}
+            {cart.length === 0 && <h1 className="font-semibold p-2 mx-auto text-center  rounded-lg text-lg  "> Cart is Empty</h1>}
             {cart &&
               cart.map((e, i) => {
                 return (
@@ -118,7 +126,7 @@ const CartDrawer = () => {
                         <span className="font-semibold text-lg block">
                           Price:{" "}
                           <span className="text-gray-500">
-                            ${e.product_price}
+                            Rs.{e.product_price}
                           </span>
                         </span>
                         <button

@@ -44,7 +44,8 @@ const ProductCard = ({ data }) => {
               : data.product_desc.substr(0, 50) + "..."}
           </Text>
           <Text fontWeight={"semibold"} fontSize={"xl"}>
-            ${data.product_price}
+            Rs.{data.product_price} -  <span className="text-red-500 text-[18px]">{data.product_discount || 0}% Discount</span> 
+                 
           </Text>
           {data.avg_rating && (
             <Text

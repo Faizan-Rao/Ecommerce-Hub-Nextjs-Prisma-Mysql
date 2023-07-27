@@ -90,6 +90,7 @@ model products {
   product_warranty     String?     @db.VarChar(45)
   product_stock_status Int         @db.TinyInt
   product_image        String?     @db.Text
+  product_discount  Int? @default(0)
   subcategory_id       Int
   product_qty          Int?        @default(1)
   store_id             Int
