@@ -58,7 +58,7 @@ const StoreAdmin = () => {
               <span>Orders</span>
             </div>
             <div className="text-2xl aspect-square font-bold  bg-white shadow-lg   text-green-600 min-h-[200px] rounded-xl  px-9 flex justify-center items-center flex-col">
-              <BsCurrencyDollar className="text-2xl" />
+              <p className="text-2xl" >Rs.</p>
               <span className="  aspect-[7/4] text-center  font-semibold p-4 rounded-full ">
                 {revenue?.revenue || 0}
               </span>{" "}

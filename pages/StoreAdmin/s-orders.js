@@ -140,7 +140,7 @@ const Sorders = () => {
                           {/* Total Price */}
                           <Td isNumeric>
                             <span className="text-gray-500">
-                              ${e.purchase_amount}
+                              Rs.{e.purchase_amount}
                             </span>
                           </Td>
                           <Td isNumeric>{e.bill_id}</Td>
@@ -155,7 +155,7 @@ const Sorders = () => {
                   <Th fontSize={"xl"} h={"1.5"}>
                     Total Revenue
                   </Th>
-                  <Th fontSize={"xl"}> = ${revenue?.revenue}</Th>
+                  <Th fontSize={"xl"}> = Rs.{revenue?.revenue}</Th>
                   <Th>
                     <Button
                       variant={"solid"}
@@ -228,7 +228,7 @@ const Sorders = () => {
                           {/* Total Price */}
                           <Td isNumeric>
                             <span className="text-gray-500">
-                              ${e.purchase_amount}
+                              Rs.{e.purchase_amount}
                             </span>
                           </Td>
                           <Td isNumeric>{e.bill_id}</Td>
@@ -243,7 +243,7 @@ const Sorders = () => {
                   <Th fontSize={"xl"} h={"1.5"}>
                     Total Revenue
                   </Th>
-                  <Th fontSize={"xl"}> = ${filteredRevenue}</Th>
+                  <Th fontSize={"xl"}> = Rs.{filteredRevenue}</Th>
                   <Th>
                     <Button
                       variant={"solid"}

@@ -155,6 +155,7 @@ const Sproduct = () => {
         product_title: data.product_title,
         product_desc: data.product_desc,
         product_price: data.product_price,
+        product_discount: data.product_discount || null,
         product_warranty: data.product_warranty,
         product_stock_status: data.product_stock_status,
         product_image: file.data.image.newFilename ,
@@ -192,6 +193,7 @@ const Sproduct = () => {
          product_title: data.product_title || "",
          product_desc: data.product_desc || "",
          product_price: data.product_price || null,
+         product_discount: data.product_discount || null,
          product_warranty: data.product_warranty || "",
          product_stock_status: data.product_stock_status || null,
          product_image: file?.data?.image?.newFilename || "" ,
@@ -264,6 +266,7 @@ const Sproduct = () => {
                   <Th>product-Title</Th>
                   <Th>product-desc</Th>
                   <Th>product-price</Th>
+                  <Th>product-discount</Th>
                   <Th>product-stock</Th>
                   <Th>product-warranty</Th>
 
@@ -282,6 +285,7 @@ const Sproduct = () => {
               <Tbody bgColor={"white"}>
                 {!isLoading &&
                   data?.map((e, i) => {
+                    console.log(e)
                     return (
                       <Tr key={i + 1}>
                         <Td isNumeric>{i + 1}</Td>
@@ -317,7 +321,14 @@ const Sproduct = () => {
                           textAlign={"center"}
                           className="text-gray-500 text-lg font-semibold"
                         >
-                          ${e.product_price}
+                          Rs.{e.product_price}
+                        </Td>
+                        <Td
+                          w={"1"}
+                          textAlign={"center"}
+                          className="text-red-500 text-lg font-semibold"
+                        >
+                          {e.product_discount}%
                         </Td>
                         <Td
                           w={"1"}
@@ -400,6 +411,15 @@ const Sproduct = () => {
                     })}
                   />
                   {errors1.product_price && <span>This field is required</span>}
+                  <input
+                    type="number"
+                    className="border-2 p-1 outline-none rounded-lg w-80 "
+                    placeholder="product discount"
+                    {...register1("product_discount", {
+                      required: true,
+                    })}
+                  />
+                  {errors1.product_discount && <span>This field is required</span>}
                   <input
                     type="text"
                     className="border-2 p-1 outline-none rounded-lg w-80 "
@@ -507,6 +527,14 @@ const Sproduct = () => {
                     {...register2("product_price",)}
                   />
                   {errors2.product_price && <span>This field is required</span>}
+                  <input
+                    type="number"
+                    className="border-2 p-1 outline-none rounded-lg w-80 "
+                    placeholder="product discount"
+                    {...register2("product_discount",)}
+                  />
+                  {errors2.product_price && <span>This field is required</span>}
+                  
                   <input
                     type="text"
                     className="border-2 p-1 outline-none rounded-lg w-80 "
